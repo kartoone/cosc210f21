@@ -17,9 +17,12 @@ public class ArraysDemo {
 		System.out.println(ages.length);
 		System.out.println(ages[0]);
 		
+		int total = 0;
 		for (int i = 0; i < ages.length; i++) {
 			System.out.println(ages[i]);
+			total = total + ages[i];
 		}
+		System.out.println("average age: " + ((double)total/ages.length));
 		// python equivalent to the loop above:
 		// for i,age in ages.enumerate():
 		//	  print(i)
@@ -40,6 +43,9 @@ public class ArraysDemo {
 		ageList.add(35);
 		ageList.add(65);		
 		ageList.set(0, 26); // replace the "25" that is currently in position 0 with a new value 26
+		ages[0] = 26;		// this is equivalent to the previous line when using a native java array
+		System.out.println(ageList.get(0));
+		System.out.println(ages[0]); // this is equivalent to the previous line when using a native java array
 		ageList.add(2, 38); // insert the value "38" at position 2
 		ageList.remove(0);  // remove the first item in the ArrayList
 		
