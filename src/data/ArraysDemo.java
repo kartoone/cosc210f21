@@ -25,7 +25,7 @@ public class ArraysDemo {
 		System.out.println("average age: " + ((double)total/ages.length));
 		// python equivalent to the loop above:
 		// for i,age in ages.enumerate():
-		//	  print(i)
+		//    print(i)
 		//    print(age)
 	
 		// python equivalent to the loop below:
