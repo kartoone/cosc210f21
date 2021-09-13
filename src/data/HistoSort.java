@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 // Histo - short for histogram 
-public class Histo {
+public class HistoSort {
 
 	// remember, all java programs start with a main() method inside a class
 	// also, the FileNotFoundException must either be handled or thrown, it's less code if we just "throw" it, but it makes our program less robust because it doesn't handle the error where the specified file is not found
@@ -45,5 +45,8 @@ public class Histo {
 		System.out.println(allTheDigits);
 		
 	}
+	
+	// we will add two static sort methods below... one for the native array
+	// and one for an ArrayList during class on Wednesday!
 
 }

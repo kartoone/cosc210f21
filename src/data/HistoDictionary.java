@@ -4,9 +4,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.TreeMap;
+import java.util.Map;
 
 // Histo - short for histogram 
-public class Histo {
+// new and improved to demonstrate the Java version of a Python dictionary (which is TreeMap)
+public class HistoDictionary {
 
 	// remember, all java programs start with a main() method inside a class
 	// also, the FileNotFoundException must either be handled or thrown, it's less code if we just "throw" it, but it makes our program less robust because it doesn't handle the error where the specified file is not found
@@ -15,8 +18,8 @@ public class Histo {
 		// create a Scanner object named filein that we can use to read through a file
 		Scanner filein = new Scanner(new File("test.txt"));
 		
-		// create a native java array named counts[] because we know exactly how many elements we need and what to initialize them to
-		int counts[] = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		// create a TreeMap (i.e., java dictionary) named counts because we DON'T know exactly how many elements we need and what to initialize them to
+		TreeMap<Integer, Integer> counts = new TreeMap<>();
 
 		// we DON'T know how many numbers are going to be in the file, so it makes sense to use
 		// an ArrayList instead of a native java array. The ArrayList named allTheDigits will grow
@@ -27,10 +30,20 @@ public class Histo {
 		while (filein.hasNextLine()) {
 			int digit = filein.nextInt();
 			allTheDigits.add(digit);
-			counts[digit] = counts[digit] + 1;
+			if (counts.containsKey(digit)) {
+				int oldcount = counts.get(digit);
+				counts.put(digit, oldcount+1);
+			} else {
+				counts.put(digit, 1);
+			}
 		}
-		for (int i = 0; i < counts.length; i++) {
-			System.out.println(i + " occurred " + counts[i] + " times.");
+
+		System.out.println("NOT user friendly display of the counts");
+		System.out.println(counts);
+		
+		System.out.println("User friendly display of the counts");
+		for (Map.Entry<Integer, Integer> entry : counts.entrySet()) {
+			System.out.println(entry.getKey() + " occured " + entry.getValue() + " time(s)");
 		}
 		
 		// note that ArrayList has a very handy "toString()" method that gets called automatically
