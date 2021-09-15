@@ -39,14 +39,25 @@ public class HistoSort {
 		System.out.println(allTheDigits);
 		
 		// sort the list ... null means use "natural" ordering for the elements in the list
-		allTheDigits.sort(null);
-
+		//allTheDigits.sort(null);
+        insertionSort(allTheDigits);
+        
 		// display our sorted list
-		System.out.println(allTheDigits);
+		System.out.println(allTheDigits);		
 		
 	}
 	
-	// we will add two static sort methods below... one for the native array
-	// and one for an ArrayList during class on Wednesday!
-
+	static void insertionSort(ArrayList<Integer> list) {
+		// i: the index of the sorted part of our list
+		for (int i=0; i<list.size()-1; i++) {
+			int c = list.remove(i+1); // c is the current number that we are trying to insert into the right location in the sorted part of our list
+			int j = i;
+			while(j>=0 && c<list.get(j)) {
+				j--;
+			}
+			list.add(j+1, c);
+		}
+	}
+	
+	
 }
