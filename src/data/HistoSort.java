@@ -78,18 +78,18 @@ public class HistoSort {
 	
 	// the list MUST BE SORTED ALREADY for this to work
 	// HINT: use the sublist method provided by ArrayList
-	static ArrayList<Integer> searchSortedList(ArrayList<Integer> sortedlist) {
+	static ArrayList<Integer> searchSorted(ArrayList<Integer> sortedlist) {
 		return null;
 	}
 	
 	// add search methods here
-	static ArrayList<Integer> search(ArrayList<Integer> list) {
+	static ArrayList<Integer> searchAll(ArrayList<Integer> list) {
 		// to do: finish!
 		return null;
 	}
 	
 	// add search methods here
-	static int[] search(int arr[]) {
+	static int[] searchAll(int arr[]) {
 		// to do: finish!
 		return null;
 	}
