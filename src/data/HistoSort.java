@@ -22,11 +22,13 @@ public class HistoSort {
 		// an ArrayList instead of a native java array. The ArrayList named allTheDigits will grow
 		// dynamically as we add items to it
 		ArrayList<Integer> allTheDigits = new ArrayList<>();
+		ArrayList<Integer> allTheDigits2 = new ArrayList<>();
 		
 		// note the while loop here ... remember that scanners almost always use while loops
 		while (filein.hasNextLine()) {
 			int digit = filein.nextInt();
 			allTheDigits.add(digit);
+			allTheDigits2.add(digit);
 			counts[digit] = counts[digit] + 1;
 		}
 		for (int i = 0; i < counts.length; i++) {
@@ -38,14 +40,29 @@ public class HistoSort {
 		// having to use a for loop
 //		System.out.println(allTheDigits);
 		
+	
 		// let's create a native array that is the exact size so we can run our timing comparisons
-//		int allTheDigitsArray[] = new int[allTheDigits.size()];
-		int[] allTheDigitsArray = allTheDigits.stream().mapToInt(i -> i).toArray();
+		int allTheDigitsArray[] = new int[allTheDigits.size()];
+		for (int i=0; i<allTheDigits.size(); i++) {
+			allTheDigitsArray[i] = allTheDigits.get(i);
+		}		
+//		int[] allTheDigitsArray = allTheDigits.stream().mapToInt(i -> i).toArray();
 		
 		// sort the list ... null means use "natural" ordering for the elements in the list
-		//allTheDigits.sort(null);
-        insertionSort(allTheDigits);
+		long start = System.currentTimeMillis();		
+		allTheDigits.sort(null);
+		long finish = System.currentTimeMillis();
+		long elapsed = finish - start;
+        
+		start = System.currentTimeMillis();
+		insertionSort(allTheDigits2);
+		finish = System.currentTimeMillis();
+		elapsed = finish - start;
+		
+		start = System.currentTimeMillis();
         insertionSort(allTheDigitsArray);
+        finish = System.currentTimeMillis();
+        elapsed = finish - start;
         
 		// display our sorted list
 		//System.out.println(allTheDigits);				
