@@ -36,28 +36,62 @@ public class HistoSort {
 		// note that ArrayList has a very handy "toString()" method that gets called automatically
 		// by the println method and displays a nicely formatted list of all its data without us
 		// having to use a for loop
-		System.out.println(allTheDigits);
+//		System.out.println(allTheDigits);
+		
+		// let's create a native array that is the exact size so we can run our timing comparisons
+//		int allTheDigitsArray[] = new int[allTheDigits.size()];
+		int[] allTheDigitsArray = allTheDigits.stream().mapToInt(i -> i).toArray();
 		
 		// sort the list ... null means use "natural" ordering for the elements in the list
 		//allTheDigits.sort(null);
         insertionSort(allTheDigits);
+        insertionSort(allTheDigitsArray);
         
 		// display our sorted list
-		System.out.println(allTheDigits);		
-		
+		//System.out.println(allTheDigits);				
 	}
 	
 	static void insertionSort(ArrayList<Integer> list) {
 		// i: the index of the sorted part of our list
 		for (int i=0; i<list.size()-1; i++) {
-			int c = list.remove(i+1); // c is the current number that we are trying to insert into the right location in the sorted part of our list
+			int cur = list.remove(i+1); // cur is the current number that we are trying to insert into the right location in the sorted part of our list
 			int j = i;
-			while(j>=0 && c<list.get(j)) {
-				j--;
-			}
-			list.add(j+1, c);
+			while(j>=0 && cur<list.get(j)) {
+				j--; 
+			}			
+			list.add(j+1, cur);
 		}
 	}
 	
+	static void insertionSort(int arr[]) {
+		// i: the index of the sorted part of our list
+		for (int i=1; i<arr.length-1; i++) {
+			int cur = arr[i];
+			int j = i-1;
+			while (j>=0 && arr[j] > cur) {
+				arr[j+1] = arr[j];
+				j--;
+			}
+			arr[j+1] = cur;
+		}
+	}
+	
+	// the list MUST BE SORTED ALREADY for this to work
+	// HINT: use the sublist method provided by ArrayList
+	static ArrayList<Integer> searchSortedList(ArrayList<Integer> sortedlist) {
+		return null;
+	}
+	
+	// add search methods here
+	static ArrayList<Integer> search(ArrayList<Integer> list) {
+		// to do: finish!
+		return null;
+	}
+	
+	// add search methods here
+	static int[] search(int arr[]) {
+		// to do: finish!
+		return null;
+	}
 	
 }
