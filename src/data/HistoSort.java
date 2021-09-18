@@ -84,9 +84,9 @@ public class HistoSort {
 		
 		// TIMING MEASUREMENT #3: our insertionSort(int[]) method
 		start = System.currentTimeMillis();
-        insertionSort(digitsArray);
-        finish = System.currentTimeMillis();
-        elapsed = finish - start;
+       		insertionSort(digitsArray);
+        	finish = System.currentTimeMillis();
+        	elapsed = finish - start;
 		System.out.println("our native array insertionSort()," + elapsed);		
 		fileout.println("our native array insertionSort()," + elapsed);		
         
@@ -113,7 +113,7 @@ public class HistoSort {
 		// searchSorted(digits3)			
 		
 		// close out the CSV file so it gets saved to disk
-        fileout.close();
+        	fileout.close();
 	}
 	
 	static void insertionSort(ArrayList<Integer> list) {
