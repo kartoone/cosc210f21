@@ -1,13 +1,13 @@
-0,5027
-1,5072
-2,4910
-3,4922
-4,4977
-5,4999
-6,4978
-7,5147
-8,5061
-9,4907
-built-in ArrayList sort(),10
-our ArrayList insertionSort(),1065
-our native array insertionSort(),566
+0,5077
+1,4932
+2,5036
+3,5021
+4,4908
+5,5014
+6,5002
+7,5006
+8,5028
+9,4976
+built-in ArrayList sort(),16
+our ArrayList insertionSort(),1355
+our native array insertionSort(),855

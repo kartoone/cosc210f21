@@ -11,7 +11,7 @@ public class HistoSort {
 
 	public static ArrayList<Integer> readFile(String filename) throws FileNotFoundException {
 		// Create the Scanner for reading the file
-		Scanner filein = new Scanner(new File("testsort.txt"));
+		Scanner filein = new Scanner(new File(filename));
 		
 		// Create our ArrayList of Integers that we will be returning
 		ArrayList<Integer> list = new ArrayList<>();
@@ -96,21 +96,21 @@ public class HistoSort {
 		
 		// TO DO!!!! This is the section where you need to start writing code. Add the appropriate code after each of my numbered comments.		
 		// 1. Time the searchFirst methods (this will be a lot of code ... roughly the same amount of code as Timing Measurements 1, 2, and 3)
-		// searchFirstBuiltin(digits3)
-		// searchFirst(digits3)
-		// searchFirst(digitsArray2)
+		// searchFirstBuiltin(digits3, 768);
+		// searchFirst(digits3, 768);
+		// searchFirst(digitsArray2, 768);
 
 				
 		// 2. Time the searchAll methods (but NOT searchSorted)
-		// searchAll(digits3)
-		// searchAll(digitsArray2)
+		// searchAll(digits3, 855);
+		// searchAll(digitsArray2, 855);
 		
 		// 3. Sort the list so you can time the optimized searchSorted method
 		// Already done for you on the next line:
 		digits3.sort(null);
 				
 		// 4. Time the searchSorted method:
-		// searchSorted(digits3)			
+		// searchSorted(digits3, 855);			
 		
 		// close out the CSV file so it gets saved to disk
 		fileout.close();
@@ -150,38 +150,39 @@ public class HistoSort {
 
 	// Make the method work the same as the previous method, but instead of using indexOf
 	// you should loop through all the elements in the list until you get a hit ... and return the index of that position
-	static int searchFirst(ArrayList<Integer> list) {
+	static int searchFirst(ArrayList<Integer> list, int needle) {
 		// 5. TO DO: finish this method!
 		
 		return -1;  // return -1 if not found
 	}
 	
 	// same as previous method, but on a native array instead
-	static int searchFirst(int arr[]) {
+	static int searchFirst(int arr[], int needle) {
 		// 6. TO DO: finish this method!
 		
 		return -1;  // return -1 if not found
 	}
 
 	// Create an empty ArrayList<Integer> called "hits" and add each "hit" to hits
-	static ArrayList<Integer> searchAll(ArrayList<Integer> list) {
-		// 7. TO DO: finish this method!
-
-		return null;
+	static ArrayList<Integer> searchAll(ArrayList<Integer> list, int needle) {
+		ArrayList<Integer> hits = new ArrayList<>();		
+		return hits;
 	}
 	
 	// Create an empty ArrayList<Integer> called "hits" and add each "hit" to hits
-	static int[] searchAll(int arr[]) {
+	static int[] searchAll(int arr[], int needle) {
 	// Then at the very end of your method, call convertList to convert your "hits" list to a native java array which you can then return
-		// 8. TO DO: finish this method!
-
-		return null;
+		ArrayList<Integer> hits = new ArrayList<>();		
+		return convertList(hits);
 	}
 	
 	// the list MUST BE SORTED ALREADY for this to work
-	static ArrayList<Integer> searchSorted(ArrayList<Integer> sortedlist) {
-		// 9. TO DO: finish this method!
-		return (ArrayList<Integer>) sortedlist.subList(sortedlist.indexOf(145345), sortedlist.lastIndexOf(145345));
+	static ArrayList<Integer> searchSorted(ArrayList<Integer> sortedlist, int needle) {
+		ArrayList<Integer> hits = new ArrayList<>();
+		for (int i=hits.indexOf(needle); i!=-1 && sortedlist.get(i)==needle; i++) {
+			hits.add(i);
+		}		
+		return hits;
 	}	
 	
 }
