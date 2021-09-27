@@ -13,6 +13,8 @@ public class Bank {
 		checkingAccounts[0] = new CheckingAccount("Zeus", 100, "1");
 		checkingAccounts[1] = new CheckingAccount("Hades", 200, "2");
 		savingsAccounts[0] = new SavingsAccount("ZeusSavings", 10000, "1");
+		numCheckingAccounts = 2;
+		numSavingAccounts = 1;
 	}
 
 	public static void main(String[] args) {
