@@ -1,30 +1,18 @@
 package oop;
 
-public class CheckingAccount {
-	protected String name;
-	protected int balance;
-	protected String id;
+public class CheckingAccount extends Account {
 
+	// constructor
+	//   initialize all our protected data
 	public CheckingAccount(String inputName, int inputBalance, String inputId) {
-		name = inputName;
-		balance = inputBalance;
-		id = inputId;
+		super(inputName, inputBalance, inputId);
 	}
 
-	public String getName() {
-		return name;
-	}
-	
-	public void deposit(int amount) {
-		balance += amount;
+	@Override
+	String getType() {
+		// TODO Auto-generated method stub
+		return "checking";
 	}
 
-	public void withdraw(int amount) {
-		balance -= amount;
-	}
-	
-	public void getInfo() {
-		System.out.println("This checking account belongs to " + name + ". It has " + balance + " dollars in it.");
-	}
 
 }

@@ -1,30 +1,15 @@
 package oop;
 
-public class SavingsAccount {
-	protected String name;
-	protected int balance;
-	protected String id;
+public class SavingsAccount extends Account {
 
 	public SavingsAccount(String inputName, int inputBalance, String inputId) {
-		name = inputName;
-		balance = inputBalance;
-		id = inputId;
-	}
-
-	public String getName() {
-		return name;
+		super(inputName, inputBalance, inputId);
 	}
 	
-	public void deposit(int amount) {
-		balance += amount;
-	}
-
-	public void withdraw(int amount) {
-		balance -= amount;
-	}
-	
-	public void getInfo() {
-		System.out.println("This checking account belongs to " + name + ". It has " + balance + " dollars in it.");
+	@Override
+	String getType() {
+		// TODO Auto-generated method stub
+		return "savings";
 	}
 
 }
