@@ -30,12 +30,15 @@ public class Bank {
 	public static void main(String[] args) {
 		Bank bankOfGods = new Bank();
 		System.out.println(bankOfGods.checkingAccounts[0].name);
+		
+		// All of the methods being called below are defined in the Account class
+		// which are inherited methods for CheckingAccount objects and SavingsAccount objects
 		bankOfGods.checkingAccounts[0].deposit(5);
-		bankOfGods.checkingAccounts[0].getInfo(); 
+		bankOfGods.checkingAccounts[0].getInfo(); 		// polymorphism happens INSIDE this method (ctrl + click to see it)
 		bankOfGods.savingsAccounts[0].deposit(25);
-		bankOfGods.savingsAccounts[0].getInfo(); 
+		bankOfGods.savingsAccounts[0].getInfo(); 		// polymorphism happens INSIDE this method (ctrl + click to see it)
 		bankOfGods.savingsAccounts[0].withdraw(15);
-		bankOfGods.savingsAccounts[0].getInfo(); 
+		bankOfGods.savingsAccounts[0].getInfo(); 		// polymorphism happens INSIDE this method (ctrl + click to see it)
 	}
 
 }
