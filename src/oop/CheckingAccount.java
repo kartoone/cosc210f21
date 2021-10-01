@@ -9,8 +9,7 @@ public class CheckingAccount extends Account {
 	}
 
 	@Override
-	String getType() {
-		// TODO Auto-generated method stub
+	protected String getType() {
 		return "checking";
 	}
 

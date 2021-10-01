@@ -7,8 +7,7 @@ public class SavingsAccount extends Account {
 	}
 	
 	@Override
-	String getType() {
-		// TODO Auto-generated method stub
+	protected String getType() {
 		return "savings";
 	}
 

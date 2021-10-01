@@ -34,6 +34,6 @@ abstract public class Account {
 	
 	// This method is abstract because there is no notion of a default account type in this imaginary banking system.
 	// It is up to each specialized subclass to provide an implementation for it 
-	abstract String getType();
+	abstract protected String getType();
 	
 }
