@@ -96,10 +96,15 @@ public class HistoSort {
 		
 		// TO DO!!!! This is the section where you need to start writing code. Add the appropriate code after each of my numbered comments.		
 		// 1. Time the searchFirst methods (this will be a lot of code ... roughly the same amount of code as Timing Measurements 1, 2, and 3)
-		// searchFirstBuiltin(digits3, 768);
+		start = System.currentTimeMillis();
+		searchFirstBuiltin(digits3, 768);
+		finish = System.currentTimeMillis();
+		elapsed = finish - start;
+		System.out.println("search first builtin," + elapsed);		
+		fileout.println("search first builtin," + elapsed);		
+
 		// searchFirst(digits3, 768);
 		// searchFirst(digitsArray2, 768);
-
 				
 		// 2. Time the searchAll methods (but NOT searchSorted)
 		// searchAll(digits3, 855);
@@ -165,7 +170,12 @@ public class HistoSort {
 
 	// Create an empty ArrayList<Integer> called "hits" and add each "hit" to hits
 	static ArrayList<Integer> searchAll(ArrayList<Integer> list, int needle) {
-		ArrayList<Integer> hits = new ArrayList<>();		
+		ArrayList<Integer> hits = new ArrayList<>();
+		for (int i=0; i<list.size(); i++) {
+			if (list.get(i) == needle) {
+				hits.add(i);
+			}
+		}
 		return hits;
 	}
 	
