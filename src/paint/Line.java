@@ -5,14 +5,13 @@ import java.awt.Graphics;
 
 public class Line extends Shape {
 
-	public Line(Color c, int w, int h, int x, int y) {
-		super(c, w, h, x, y);
+	public Line(Color c) {
+		super(c, 0, 0, 0, 0);
 	}
 
 	@Override
 	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
-		
+		System.out.println(c + " line");		
 	}
 
 	@Override

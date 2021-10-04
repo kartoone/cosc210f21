@@ -11,9 +11,9 @@ public class Ellipse extends Shape {
 
 	@Override
 	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
-
+		System.out.println(c + " ellipse: " + w + "x" + h);
 	}
+
 
 	@Override
 	public double area() {

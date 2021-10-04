@@ -11,8 +11,7 @@ public class Triangle extends Shape {
 
 	@Override
 	public void draw(Graphics g) {
-		// TODO Auto-generated method stub
-
+		System.out.println(c + " triangle: " + w + "x" + h);
 	}
 
 	@Override
