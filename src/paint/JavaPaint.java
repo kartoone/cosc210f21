@@ -33,7 +33,7 @@ public class JavaPaint {
 
 	public void show() {
 		for (Shape shape : shapes) {
-			shape.draw(null);
+			shape.draw(null);	// this is the polymorphic code in our program ... the "correct" draw method is called for each "Shape" stored in our shapes ArrayList
 		}
 	}
 
