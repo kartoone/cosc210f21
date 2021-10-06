@@ -1,18 +1,29 @@
 package paint;
 
 import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.util.ArrayList;
 
-public class JavaPaint {
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+public class JavaPaint extends JFrame {
 
 	private ArrayList<Shape> shapes;
 	
 	public JavaPaint() {
+		super("JavaPaint v1.0");
 		shapes = new ArrayList<>();
 		initUI();
 	}
 		
 	private void initUI() {
+		setSize(500, 300);
+		setVisible(true);
+//		setLocationRelativeTo(null);
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+
 		Rectangle r1 = new Rectangle(Color.red, 20, 30, 0, 0);
 		Rectangle r2 = new Rectangle(Color.green, 20, 50, 100, 100);
 		Square s1 = new Square(Color.pink, 50, 100, 100);
@@ -27,8 +38,16 @@ public class JavaPaint {
 	}
 
 	public static void main(String[] args) {
-		JavaPaint paintWindow = new JavaPaint();
-		paintWindow.show();
+		EventQueue.invokeLater(() -> {
+			try {
+			JavaPaint paintWindow = new JavaPaint();
+			} catch (Throwable ex) {
+		        System.err.println("Uncaught exception - " + ex.getMessage());
+		        ex.printStackTrace(System.err);
+		    }
+//			paintWindow.setVisible(true);
+//			paintWindow.show();
+		});
 	}
 
 	public void show() {
