@@ -3,6 +3,8 @@ package paint;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
@@ -13,9 +15,16 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 
-public class JavaPaint extends JFrame {
+public class JavaPaint extends JFrame implements MouseListener {
 
+	public enum ShapeSelection {
+		RECTANGLE, SQUARE, LINE,
+		ELLIPSE, CIRCLE, TRIANGLE
+	}
+	
 	private ArrayList<Shape> shapes; // the shapes that have been "dropped" onto our painting
+
+	private ShapeSelection currentShape = ShapeSelection.RECTANGLE; // defaults to whatever the first enum is
 	
 	public JavaPaint() {
 		super("JavaPaint");
@@ -92,6 +101,9 @@ public class JavaPaint extends JFrame {
 		exit.addActionListener((event) -> System.exit(0));
 		save.addActionListener((event) -> handleSave());
 		list.addActionListener((event) -> listShapes());
+		count.addActionListener((event) -> countShapes());
+		
+		addMouseListener(this);
 	}
 
 	private void handleSave() {
@@ -105,13 +117,47 @@ public class JavaPaint extends JFrame {
 	}
 
 	// Example code for printing all the shapes into the console window
+	public void countShapes() {
+		System.out.println("You have added " + shapes.size() + " shape(s) to the drawing.");
+	}
+
+	// Polymorphic code for printing all the shapes into the console window
 	public void listShapes() {
+		// Extra check to make sure something is printed even if we haven't added any shapes yet.
 		if (shapes.size()==0) {
 			System.out.println("You haven't added any shapes yet!");
 		}
 		for (Shape shape : shapes) {
-			shape.draw(null);	// this is the polymorphic code in our program ... the "correct" draw method is called for each "Shape" stored in our shapes ArrayList
+			shape.draw(getGraphics());	// this is the polymorphic code in our program ... the "correct" draw method is called for each "Shape" stored in our shapes ArrayList
 		}
 	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		System.out.println("mouse clicked: " + e.getX() + ", " + e.getY());
+		switch (currentShape) {
+		case RECTANGLE:			
+			shapes.add(new Rectangle(Color.RED, 200, 100, e.getX(), e.getY()));
+			break;
+		case SQUARE: 
+			shapes.add(new Square(Color.RED, 200, e.getX(), e.getY()));
+			break;
+		case ELLIPSE: 
+			shapes.add(new Ellipse(Color.RED, 200, 100, e.getX(), e.getY()));
+			break;
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {}
+
+	@Override
+	public void mouseExited(MouseEvent e) {}
 
 }
