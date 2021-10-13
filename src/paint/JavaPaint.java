@@ -3,6 +3,7 @@ package paint;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -106,6 +107,14 @@ public class JavaPaint extends JFrame implements MouseListener {
 		addMouseListener(this);
 	}
 
+	@Override
+	public void paint(Graphics g) {
+		super.paint(g);
+		for (Shape shape : shapes) {
+			shape.draw(g);	// this is the polymorphic code in our program ... the "correct" draw method is called for each "Shape" stored in our shapes ArrayList
+		}
+	}
+
 	private void handleSave() {
 		System.out.println("saving file...");
 	}
@@ -146,6 +155,7 @@ public class JavaPaint extends JFrame implements MouseListener {
 			shapes.add(new Ellipse(Color.RED, 200, 100, e.getX(), e.getY()));
 			break;
 		}
+		repaint();
 	}
 
 	@Override
