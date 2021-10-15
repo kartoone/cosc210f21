@@ -3,8 +3,10 @@ package paint;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
@@ -13,7 +15,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 
-public class JavaPaint extends JFrame implements MouseListener {
+public class JavaPaint extends JFrame implements MouseListener, MouseMotionListener {
 
 	public enum ShapeSelection {
 		RECTANGLE, SQUARE, LINE,
@@ -23,6 +25,8 @@ public class JavaPaint extends JFrame implements MouseListener {
 	private ArrayList<Shape> shapes; // the shapes that have been "dropped" onto our painting
 
 	private ShapeSelection currentShape = ShapeSelection.RECTANGLE; // defaults to whatever the first enum is
+	
+	private Line currentLine = null;
 	
 	public JavaPaint() {
 		super("JavaPaint");
@@ -96,12 +100,24 @@ public class JavaPaint extends JFrame implements MouseListener {
 		menubar.add(infomenu);
 		
 		setJMenuBar(menubar);
+		
 		exit.addActionListener((event) -> System.exit(0));
 		save.addActionListener((event) -> handleSave());
 		list.addActionListener((event) -> listShapes());
 		count.addActionListener((event) -> countShapes());
-		
+		line.addActionListener((event) -> switchShapes(ShapeSelection.LINE));
+		rectangle.addActionListener((event) -> switchShapes(ShapeSelection.RECTANGLE));
+		square.addActionListener((event) -> switchShapes(ShapeSelection.SQUARE));
+		ellipse.addActionListener((event) -> switchShapes(ShapeSelection.ELLIPSE));
+		circle.addActionListener((event) -> switchShapes(ShapeSelection.CIRCLE));
+		triangle.addActionListener((event) -> switchShapes(ShapeSelection.TRIANGLE));
+
 		addMouseListener(this);
+		addMouseMotionListener(this);
+	}
+
+	private void switchShapes(ShapeSelection selectedShape) {
+		currentShape = selectedShape;
 	}
 
 	@Override
@@ -143,13 +159,19 @@ public class JavaPaint extends JFrame implements MouseListener {
 		System.out.println("mouse clicked: " + e.getX() + ", " + e.getY());
 		switch (currentShape) {
 		case RECTANGLE:			
-			shapes.add(new Rectangle(Color.RED, 200, 100, e.getX(), e.getY()));
+			shapes.add(new Rectangle(Color.RED, 100, 50, e.getX(), e.getY()));
 			break;
 		case SQUARE: 
-			shapes.add(new Square(Color.RED, 200, e.getX(), e.getY()));
+			shapes.add(new Square(Color.RED, 50, e.getX(), e.getY()));
 			break;
 		case ELLIPSE: 
-			shapes.add(new Ellipse(Color.RED, 200, 100, e.getX(), e.getY()));
+			shapes.add(new Ellipse(Color.RED, 100, 50, e.getX(), e.getY()));
+			break;
+		case CIRCLE: 
+			shapes.add(new Circle(Color.RED, 50, e.getX(), e.getY()));
+			break;		
+		case TRIANGLE: 
+			shapes.add(new Triangle(Color.RED, 100, 50, e.getX(), e.getY()));
 			break;
 		}
 		repaint();
@@ -159,12 +181,28 @@ public class JavaPaint extends JFrame implements MouseListener {
 	public void mousePressed(MouseEvent e) {}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) { currentLine = null; }
 
 	@Override
 	public void mouseEntered(MouseEvent e) {}
 
 	@Override
 	public void mouseExited(MouseEvent e) {}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		System.out.println(e.getX() + "," + e.getY());
+		if (currentLine == null) {
+			currentLine = new Line(Color.RED);
+			shapes.add(currentLine);
+		}
+		currentLine.points.add(new Point(e.getX(), e.getY()));
+		repaint();
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		
+	}
 
 }
