@@ -14,8 +14,8 @@ public class Review {
 		// examples of objects
 		Newsfeed conservative = new Newsfeed(null, null, null);
 		Newsfeed liberal = new Newsfeed(null, null, null);
-		conservative.viewArticle(3);
-		liberal.viewArticle(3);
+//		conservative.viewArticle(3);
+//		liberal.viewArticle(3);
 		String name = "Brian Toone";
 		System.out.println(name.length());
 		
@@ -25,12 +25,18 @@ public class Review {
 				new Newsfeed(null, null, null),
 				new Newsfeed(null, null, null)
 		};
-		feeds[0].viewArticle(3);
-		feeds[1].viewArticle(3);
-		int numbersArray[] = new int[] {3, 2, 1};
+		//feeds[0].viewArticle(3);
+		//feeds[1].viewArticle(3);
+		int numbersArray[] = new int[] { 8, 9, 10 };
 		for (int i=0; i<numbersArray.length; i++) {
 			System.out.println(i + ": " + numbersArray[i]);
 		}
+
+//		i = 0;
+//		while(i<numbersArray.length) {
+//			i = i + 1;
+//		}
+		
 		for (int v : numbersArray) {
 			System.out.println(v);
 		}
