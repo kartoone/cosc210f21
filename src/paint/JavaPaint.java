@@ -14,6 +14,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JOptionPane;
 
 public class JavaPaint extends JFrame implements MouseListener, MouseMotionListener {
 
@@ -25,6 +26,9 @@ public class JavaPaint extends JFrame implements MouseListener, MouseMotionListe
 	private ArrayList<Shape> shapes; // the shapes that have been "dropped" onto our painting
 
 	private ShapeSelection currentShape = ShapeSelection.RECTANGLE; // defaults to whatever the first enum is
+	private int currentWidth = 100;
+	private int currentHeight = 50;
+	private Color currentColor = Color.red;
 	
 	private Line currentLine = null;
 	
@@ -92,6 +96,13 @@ public class JavaPaint extends JFrame implements MouseListener, MouseMotionListe
 		
 		menubar.add(shapemenu);
 		
+		JMenu propmenu = new JMenu("Properties");
+		JMenuItem size = new JMenuItem("Size");
+		JMenuItem color = new JMenuItem("Color");
+		propmenu.add(size);
+		propmenu.add(color);
+		menubar.add(propmenu);
+
 		JMenu infomenu = new JMenu("Info");
 		JMenuItem count = new JMenuItem("Count Shapes");
 		JMenuItem list = new JMenuItem("List Shapes");
@@ -103,6 +114,8 @@ public class JavaPaint extends JFrame implements MouseListener, MouseMotionListe
 		
 		exit.addActionListener((event) -> System.exit(0));
 		save.addActionListener((event) -> handleSave());
+		size.addActionListener((event) -> updateSize());
+		color.addActionListener((event) -> updateColor());
 		list.addActionListener((event) -> listShapes());
 		count.addActionListener((event) -> countShapes());
 		line.addActionListener((event) -> switchShapes(ShapeSelection.LINE));
@@ -114,6 +127,17 @@ public class JavaPaint extends JFrame implements MouseListener, MouseMotionListe
 
 		addMouseListener(this);
 		addMouseMotionListener(this);
+	}
+
+	private void updateColor() {
+		
+	}
+
+	private void updateSize() {
+		String userinput = JOptionPane.showInputDialog("Enter a new width");
+		currentWidth = Integer.parseInt(userinput);
+		userinput = JOptionPane.showInputDialog("Enter a new height (will be used for squares, circles)");
+		currentHeight = Integer.parseInt(userinput);
 	}
 
 	private void switchShapes(ShapeSelection selectedShape) {
@@ -159,19 +183,19 @@ public class JavaPaint extends JFrame implements MouseListener, MouseMotionListe
 		System.out.println("mouse clicked: " + e.getX() + ", " + e.getY());
 		switch (currentShape) {
 		case RECTANGLE:			
-			shapes.add(new Rectangle(Color.RED, 100, 50, e.getX(), e.getY()));
+			shapes.add(new Rectangle(currentColor, currentWidth, currentHeight, e.getX(), e.getY()));
 			break;
 		case SQUARE: 
-			shapes.add(new Square(Color.RED, 50, e.getX(), e.getY()));
+			shapes.add(new Square(currentColor, currentHeight, e.getX(), e.getY()));
 			break;
 		case ELLIPSE: 
-			shapes.add(new Ellipse(Color.RED, 100, 50, e.getX(), e.getY()));
+			shapes.add(new Ellipse(currentColor, currentWidth, currentHeight, e.getX(), e.getY()));
 			break;
 		case CIRCLE: 
-			shapes.add(new Circle(Color.RED, 50, e.getX(), e.getY()));
+			shapes.add(new Circle(currentColor, currentHeight, e.getX(), e.getY()));
 			break;		
 		case TRIANGLE: 
-			shapes.add(new Triangle(Color.RED, 100, 50, e.getX(), e.getY()));
+			shapes.add(new Triangle(currentColor, currentWidth, currentHeight, e.getX(), e.getY()));
 			break;
 		}
 		repaint();
@@ -198,6 +222,17 @@ public class JavaPaint extends JFrame implements MouseListener, MouseMotionListe
 		}
 		currentLine.points.add(new Point(e.getX(), e.getY()));
 		repaint();
+
+// The code below would force you to select "line" from
+// the menu before you can draw a line.
+//		if (currentShape == ShapeSelection.LINE) {
+//			if (currentLine == null) {
+//				currentLine = new Line(Color.RED);
+//				shapes.add(currentLine);
+//			}
+//			currentLine.points.add(new Point(e.getX(), e.getY()));
+//			repaint();
+//		}
 	}
 
 	@Override
