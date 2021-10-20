@@ -15,6 +15,10 @@ public class Ellipse extends Shape {
 		g.drawOval(x-w/2, y-h/2, w, h);
 	}
 
+	@Override
+	protected String getShapeType() {
+		return "Ellipse";
+	}
 
 	@Override
 	public double area() {

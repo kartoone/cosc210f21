@@ -10,6 +10,11 @@ public class Rectangle extends Shape {
 	}
 
 	@Override
+	protected String getShapeType() {
+		return "Rectangle";
+	}
+
+	@Override
 	public void draw(Graphics g) {
 		g.setColor(c);
 		g.drawRect(x-w/2, y-h/2, w, h);

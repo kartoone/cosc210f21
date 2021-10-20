@@ -7,7 +7,14 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import javax.swing.JColorChooser;
+import javax.swing.JFileChooser;
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -62,8 +69,10 @@ public class JavaPaint extends JFrame implements MouseListener, MouseMotionListe
 	private void setupMenuBar() {
 		JMenuBar menubar = new JMenuBar();		
 		JMenu filemenu = new JMenu("File");
+		JMenuItem open = new JMenuItem("Open");
 		JMenuItem save = new JMenuItem("Save");
 		JMenuItem exit = new JMenuItem("Exit");
+		filemenu.add(open);
 		filemenu.add(save);
 		filemenu.add(exit);
 		menubar.add(filemenu);
@@ -113,6 +122,7 @@ public class JavaPaint extends JFrame implements MouseListener, MouseMotionListe
 		setJMenuBar(menubar);
 		
 		exit.addActionListener((event) -> System.exit(0));
+		open.addActionListener((event) -> handleOpen());
 		save.addActionListener((event) -> handleSave());
 		size.addActionListener((event) -> updateSize());
 		color.addActionListener((event) -> updateColor());
@@ -129,8 +139,64 @@ public class JavaPaint extends JFrame implements MouseListener, MouseMotionListe
 		addMouseMotionListener(this);
 	}
 
-	private void updateColor() {
+	private void handleOpen() {
+		System.out.println("opening file...");
+		JFileChooser fc = new JFileChooser();
+		int result = fc.showOpenDialog(null);
+		if (result == JFileChooser.APPROVE_OPTION) {
+			openFile(fc.getSelectedFile());
+		}	
+	}
+
+	// Algorithm
+	//   1. Delete all shapes from our "shapes" ArrayList
+	//   2. As we parse the file, create and add the "correct" shape into the ArrayList
+	//   3. Call "repaint()" to paint our newly created shapes into the window
+	private void openFile(File selectedFile) {
+		try {
+			// Step 1: delete all shapes
+			shapes.clear();
+			
+			// Step 2: parse the file and create the shapes
+			Scanner in = new Scanner(selectedFile);
+			while (in.hasNextLine()) {
+				String line = in.nextLine();
+				String parts[] = line.split(",");
+				System.out.println(line);
+				System.out.println(parts.length);
+				switch(parts[0]) {
+				case "Rectangle":
+					System.out.println("creating rectangle");
+					break;
+				case "Square":
+					System.out.println("creating square");
+					break;
+				case "Ellipse":
+					System.out.println("creating ellipse");
+					break;
+				case "Circle":
+					System.out.println("creating circle");
+					break;
+				case "Triangle":
+					System.out.println("creating triangle");
+					break;
+				case "Line":
+					System.out.println("creating line");
+					break;
+				}
+			}
+		} catch (FileNotFoundException e) {
+
+		}
 		
+		
+	}
+
+	private void updateColor() {
+		Color newColor = JColorChooser.showDialog(null, "Choose a color", currentColor);
+	    if (newColor != null) {
+	    	currentColor = newColor;
+	    }
 	}
 
 	private void updateSize() {
@@ -154,6 +220,24 @@ public class JavaPaint extends JFrame implements MouseListener, MouseMotionListe
 
 	private void handleSave() {
 		System.out.println("saving file...");
+		JFileChooser fc = new JFileChooser();
+		int result = fc.showSaveDialog(null);
+		//System.out.println(result);
+		if (result == JFileChooser.APPROVE_OPTION) {
+			saveFile(fc.getSelectedFile());
+		}
+	}
+
+	private void saveFile(File selectedFile) {
+		try {
+			PrintWriter out = new PrintWriter(selectedFile);
+			for (Shape shape : shapes) {
+				shape.save(out);
+			}
+			out.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("file not found");
+		}		
 	}
 
 	public static void main(String[] args) {
@@ -217,7 +301,7 @@ public class JavaPaint extends JFrame implements MouseListener, MouseMotionListe
 	public void mouseDragged(MouseEvent e) {
 		System.out.println(e.getX() + "," + e.getY());
 		if (currentLine == null) {
-			currentLine = new Line(Color.RED);
+			currentLine = new Line(currentColor);
 			shapes.add(currentLine);
 		}
 		currentLine.points.add(new Point(e.getX(), e.getY()));

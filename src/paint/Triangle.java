@@ -25,6 +25,11 @@ public class Triangle extends Shape {
 	}
 
 	@Override
+	protected String getShapeType() {
+		return "Triangle";
+	}
+	
+	@Override
 	public double area() {
 		// TODO Auto-generated method stub
 		return 0;

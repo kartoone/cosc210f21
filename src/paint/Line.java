@@ -14,6 +14,11 @@ public class Line extends Shape {
 	}
 
 	@Override
+	protected String getShapeType() {
+		return "Line";
+	}
+
+	@Override
 	public void draw(Graphics g) {
 		System.out.println(c + " line");
 		g.setColor(c);
