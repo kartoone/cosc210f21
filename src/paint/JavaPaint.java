@@ -163,27 +163,51 @@ public class JavaPaint extends JFrame implements MouseListener, MouseMotionListe
 				String line = in.nextLine();
 				String parts[] = line.split(",");
 				System.out.println(line);
-				System.out.println(parts.length);
+				Shape s = null;
+				Color c = new Color(Integer.parseInt(parts[1]));
+				int w = Integer.parseInt(parts[2]);
+				int h = Integer.parseInt(parts[3]);
+				int x = Integer.parseInt(parts[4]);
+				int y = Integer.parseInt(parts[5]);
 				switch(parts[0]) {
 				case "Rectangle":
 					System.out.println("creating rectangle");
+					s = new Rectangle(c, w, h, x, y);
 					break;
 				case "Square":
 					System.out.println("creating square");
+					s = new Square(c, h, x, y);
 					break;
 				case "Ellipse":
 					System.out.println("creating ellipse");
+					s = new Ellipse(c, w, h, x, y);
 					break;
 				case "Circle":
 					System.out.println("creating circle");
+					s = new Circle(c, h, x, y);
 					break;
 				case "Triangle":
 					System.out.println("creating triangle");
+					s = new Triangle(c, w, h, x, y);
 					break;
 				case "Line":
 					System.out.println("creating line");
+					s = new Line(c);
+					for (int i=6; i<parts.length; i++) {
+						String coords[] = parts[i].split("-");
+						int px = Integer.parseInt(coords[0]);
+						int py = Integer.parseInt(coords[1]);
+						((Line)s).points.add(new Point(px,py));
+					}
 					break;
 				}
+				
+				// 3. Store the newly created shape in our list of shapes
+				if (s!=null) {
+					shapes.add(s);
+				}
+				
+				repaint();
 			}
 		} catch (FileNotFoundException e) {
 

@@ -2,6 +2,7 @@ package paint;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.io.PrintWriter;
 
 public abstract class Shape {
@@ -25,7 +26,16 @@ public abstract class Shape {
 	public abstract double area();
 
 	public void save(PrintWriter out) {
-		out.println(getShapeType() + "," + c + "," + w + "," + h + "," + x + "," + y);		
+		if (this instanceof Line) {
+			Line l = (Line) this;
+			out.print(getShapeType() + "," + c.getRGB() + "," + 0 + "," + 0 + "," + 0 + "," + 0);
+			for (Point p : l.points) {
+				out.print("," + p.x + "-" + p.y);
+			}
+			out.println();
+		} else {
+			out.println(getShapeType() + "," + c.getRGB() + "," + w + "," + h + "," + x + "," + y);
+		}
 	}
 
 	
