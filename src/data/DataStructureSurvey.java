@@ -95,7 +95,7 @@ public class DataStructureSurvey {
 		}
 		
 		// Stack example
-		Stack<String> airportStack = new ListStack<>();
+		Stack<String> airportStack = new ArrayStack<>();
 		airportStack.push("BHM");
 		System.out.println("size after adding BHM: " + airportStack.size());
 		airportStack.push("ATL");

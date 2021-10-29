@@ -16,6 +16,7 @@ public interface Stack<T> {
 	
 	/**
 	 * Returns and removes the top data item (the last item that was added). Cannot be called on empty stack.
+	 * NEVER CALL POP ON AN EMPTY STACK
 	 * @return the data that is on top of the stack.
 	 * @throws EmptyStackException if you pop an empty stack
 	 */
@@ -23,6 +24,7 @@ public interface Stack<T> {
 	
 	/**
 	 * Returns but doesn't remove the top data item (the last item that was added). Cannot be called on empty stack.
+	 * NEVER CALL TOP ON AN EMPTY STACK
 	 * @return the data that is on top of the stack.
 	 * @throws EmptyStackException if you pop an empty stack
 	 */
