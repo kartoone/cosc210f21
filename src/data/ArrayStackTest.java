@@ -32,7 +32,18 @@ class ArrayStackTest {
 	 */
 	@Test
 	void testArrayStack() {
-		fail("Not yet implemented");
+		airportStack = new ArrayStack<>();
+		assertEquals(0, airportStack.size());
+		assertEquals(ArrayStack.DEFAULT_MAXSIZE, airportStack.maxsize);
+		for (int i=0; i<airportStack.maxsize; i++) {
+			airportStack.push("ZZZ");
+		}
+		try {
+			airportStack.push("ZZZ");
+			fail("Should have thrown error");
+		} catch (Error er) {
+			System.out.println("This error was thrown correctly: " + er);
+		}
 	}
 
 	/**
@@ -40,7 +51,18 @@ class ArrayStackTest {
 	 */
 	@Test
 	void testArrayStackInt() {
-		fail("Not yet implemented");
+		airportStack = new ArrayStack<>(3);
+		assertEquals(0, airportStack.size());
+		assertEquals(3, airportStack.maxsize);
+		airportStack.push("ZZZ");
+		airportStack.push("ZZZ");
+		airportStack.push("ZZZ");
+		try {
+			airportStack.push("ZZZ");
+			fail("Should have thrown error");
+		} catch (Error er) {
+			System.out.println("This error was thrown correctly: " + er);
+		}
 	}
 
 	/**
@@ -48,7 +70,15 @@ class ArrayStackTest {
 	 */
 	@Test
 	void testPush() {
-		fail("Not yet implemented");
+		airportStack.push("HOU");
+		assertEquals(4, airportStack.size());
+		assertEquals("HOU", airportStack.pop());
+		airportStack.pop();
+		airportStack.pop();
+		airportStack.pop();
+		airportStack.push("XYZ");
+		assertEquals(1, airportStack.size());
+		assertEquals("XYZ", airportStack.pop());
 	}
 
 	/**
@@ -56,7 +86,15 @@ class ArrayStackTest {
 	 */
 	@Test
 	void testPop() {
-		fail("Not yet implemented");
+		assertEquals("MSP", airportStack.pop());
+		assertEquals("ATL", airportStack.pop());
+		assertEquals("BHM", airportStack.pop());
+		try {
+			airportStack.pop();
+			fail("An exception was NOT thrown");
+		} catch(Exception ex) {
+		
+		}
 	}
 
 	/**
@@ -64,7 +102,18 @@ class ArrayStackTest {
 	 */
 	@Test
 	void testTop() {
-		fail("Not yet implemented");
+		assertEquals("MSP", airportStack.top());
+		assertEquals("MSP", airportStack.top());
+		assertEquals(2, airportStack.size());
+		airportStack.pop();
+		airportStack.pop();
+		airportStack.pop();
+		try {
+			airportStack.top();
+			fail("An exception was NOT thrown");
+		} catch(Exception ex) {
+		
+		}
 	}
 
 	/**
@@ -73,6 +122,10 @@ class ArrayStackTest {
 	@Test
 	void testSize() {
 		assertEquals(3,airportStack.size());
+		airportStack.pop();
+		airportStack.pop();
+		airportStack.pop();
+		assertEquals(0, airportStack.size());
 	}
 
 	/**
@@ -81,6 +134,10 @@ class ArrayStackTest {
 	@Test
 	void testIsEmpty() {
 		assertFalse(airportStack.isEmpty());
+		airportStack.pop();
+		airportStack.pop();
+		airportStack.pop();
+		assertTrue(airportStack.isEmpty());
 	}
 
 }
