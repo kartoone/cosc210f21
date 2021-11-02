@@ -1,0 +1,264 @@
+{
+    "@context": [
+        "https://geojson.org/geojson-ld/geojson-context.jsonld",
+        {
+            "@version": "1.1",
+            "wx": "https://api.weather.gov/ontology#",
+            "geo": "http://www.opengis.net/ont/geosparql#",
+            "unit": "http://codes.wmo.int/common/unit/",
+            "@vocab": "https://api.weather.gov/ontology#"
+        }
+    ],
+    "type": "Feature",
+    "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+            [
+                [
+                    -97.1089731,
+                    39.766826299999998
+                ],
+                [
+                    -97.108526900000001,
+                    39.744778799999999
+                ],
+                [
+                    -97.079846700000004,
+                    39.745119500000001
+                ],
+                [
+                    -97.08028680000001,
+                    39.767167000000001
+                ],
+                [
+                    -97.1089731,
+                    39.766826299999998
+                ]
+            ]
+        ]
+    },
+    "properties": {
+        "updated": "2021-11-02T14:36:26+00:00",
+        "units": "us",
+        "forecastGenerator": "BaselineForecastGenerator",
+        "generatedAt": "2021-11-02T17:29:59+00:00",
+        "updateTime": "2021-11-02T14:36:26+00:00",
+        "validTimes": "2021-11-02T08:00:00+00:00/P7DT17H",
+        "elevation": {
+            "unitCode": "wmoUnit:m",
+            "value": 441.95999999999998
+        },
+        "periods": [
+            {
+                "number": 1,
+                "name": "This Afternoon",
+                "startTime": "2021-11-02T12:00:00-05:00",
+                "endTime": "2021-11-02T18:00:00-05:00",
+                "isDaytime": true,
+                "temperature": 45,
+                "temperatureUnit": "F",
+                "temperatureTrend": null,
+                "windSpeed": "5 mph",
+                "windDirection": "S",
+                "icon": "https://api.weather.gov/icons/land/day/bkn?size=medium",
+                "shortForecast": "Mostly Cloudy",
+                "detailedForecast": "Mostly cloudy, with a high near 45. South wind around 5 mph."
+            },
+            {
+                "number": 2,
+                "name": "Tonight",
+                "startTime": "2021-11-02T18:00:00-05:00",
+                "endTime": "2021-11-03T06:00:00-05:00",
+                "isDaytime": false,
+                "temperature": 31,
+                "temperatureUnit": "F",
+                "temperatureTrend": null,
+                "windSpeed": "5 mph",
+                "windDirection": "SE",
+                "icon": "https://api.weather.gov/icons/land/night/bkn?size=medium",
+                "shortForecast": "Mostly Cloudy",
+                "detailedForecast": "Mostly cloudy, with a low around 31. Southeast wind around 5 mph."
+            },
+            {
+                "number": 3,
+                "name": "Wednesday",
+                "startTime": "2021-11-03T06:00:00-05:00",
+                "endTime": "2021-11-03T18:00:00-05:00",
+                "isDaytime": true,
+                "temperature": 47,
+                "temperatureUnit": "F",
+                "temperatureTrend": null,
+                "windSpeed": "5 mph",
+                "windDirection": "S",
+                "icon": "https://api.weather.gov/icons/land/day/bkn?size=medium",
+                "shortForecast": "Mostly Cloudy",
+                "detailedForecast": "Mostly cloudy, with a high near 47. South wind around 5 mph."
+            },
+            {
+                "number": 4,
+                "name": "Wednesday Night",
+                "startTime": "2021-11-03T18:00:00-05:00",
+                "endTime": "2021-11-04T06:00:00-05:00",
+                "isDaytime": false,
+                "temperature": 32,
+                "temperatureUnit": "F",
+                "temperatureTrend": null,
+                "windSpeed": "5 mph",
+                "windDirection": "S",
+                "icon": "https://api.weather.gov/icons/land/night/bkn?size=medium",
+                "shortForecast": "Mostly Cloudy",
+                "detailedForecast": "Mostly cloudy, with a low around 32. South wind around 5 mph."
+            },
+            {
+                "number": 5,
+                "name": "Thursday",
+                "startTime": "2021-11-04T06:00:00-05:00",
+                "endTime": "2021-11-04T18:00:00-05:00",
+                "isDaytime": true,
+                "temperature": 52,
+                "temperatureUnit": "F",
+                "temperatureTrend": null,
+                "windSpeed": "5 to 10 mph",
+                "windDirection": "S",
+                "icon": "https://api.weather.gov/icons/land/day/few?size=medium",
+                "shortForecast": "Sunny",
+                "detailedForecast": "Sunny, with a high near 52. South wind 5 to 10 mph."
+            },
+            {
+                "number": 6,
+                "name": "Thursday Night",
+                "startTime": "2021-11-04T18:00:00-05:00",
+                "endTime": "2021-11-05T06:00:00-05:00",
+                "isDaytime": false,
+                "temperature": 35,
+                "temperatureUnit": "F",
+                "temperatureTrend": null,
+                "windSpeed": "5 to 10 mph",
+                "windDirection": "S",
+                "icon": "https://api.weather.gov/icons/land/night/few?size=medium",
+                "shortForecast": "Mostly Clear",
+                "detailedForecast": "Mostly clear, with a low around 35. South wind 5 to 10 mph."
+            },
+            {
+                "number": 7,
+                "name": "Friday",
+                "startTime": "2021-11-05T06:00:00-05:00",
+                "endTime": "2021-11-05T18:00:00-05:00",
+                "isDaytime": true,
+                "temperature": 56,
+                "temperatureUnit": "F",
+                "temperatureTrend": null,
+                "windSpeed": "10 to 20 mph",
+                "windDirection": "S",
+                "icon": "https://api.weather.gov/icons/land/day/few?size=medium",
+                "shortForecast": "Sunny",
+                "detailedForecast": "Sunny, with a high near 56. South wind 10 to 20 mph."
+            },
+            {
+                "number": 8,
+                "name": "Friday Night",
+                "startTime": "2021-11-05T18:00:00-05:00",
+                "endTime": "2021-11-06T06:00:00-05:00",
+                "isDaytime": false,
+                "temperature": 38,
+                "temperatureUnit": "F",
+                "temperatureTrend": null,
+                "windSpeed": "10 to 15 mph",
+                "windDirection": "S",
+                "icon": "https://api.weather.gov/icons/land/night/few?size=medium",
+                "shortForecast": "Mostly Clear",
+                "detailedForecast": "Mostly clear, with a low around 38. South wind 10 to 15 mph, with gusts as high as 20 mph."
+            },
+            {
+                "number": 9,
+                "name": "Saturday",
+                "startTime": "2021-11-06T06:00:00-05:00",
+                "endTime": "2021-11-06T18:00:00-05:00",
+                "isDaytime": true,
+                "temperature": 62,
+                "temperatureUnit": "F",
+                "temperatureTrend": null,
+                "windSpeed": "5 to 10 mph",
+                "windDirection": "SW",
+                "icon": "https://api.weather.gov/icons/land/day/few?size=medium",
+                "shortForecast": "Sunny",
+                "detailedForecast": "Sunny, with a high near 62. Southwest wind 5 to 10 mph."
+            },
+            {
+                "number": 10,
+                "name": "Saturday Night",
+                "startTime": "2021-11-06T18:00:00-05:00",
+                "endTime": "2021-11-07T06:00:00-06:00",
+                "isDaytime": false,
+                "temperature": 39,
+                "temperatureUnit": "F",
+                "temperatureTrend": null,
+                "windSpeed": "5 to 10 mph",
+                "windDirection": "S",
+                "icon": "https://api.weather.gov/icons/land/night/few?size=medium",
+                "shortForecast": "Mostly Clear",
+                "detailedForecast": "Mostly clear, with a low around 39."
+            },
+            {
+                "number": 11,
+                "name": "Sunday",
+                "startTime": "2021-11-07T06:00:00-06:00",
+                "endTime": "2021-11-07T18:00:00-06:00",
+                "isDaytime": true,
+                "temperature": 62,
+                "temperatureUnit": "F",
+                "temperatureTrend": null,
+                "windSpeed": "5 to 10 mph",
+                "windDirection": "S",
+                "icon": "https://api.weather.gov/icons/land/day/sct?size=medium",
+                "shortForecast": "Mostly Sunny",
+                "detailedForecast": "Mostly sunny, with a high near 62."
+            },
+            {
+                "number": 12,
+                "name": "Sunday Night",
+                "startTime": "2021-11-07T18:00:00-06:00",
+                "endTime": "2021-11-08T06:00:00-06:00",
+                "isDaytime": false,
+                "temperature": 39,
+                "temperatureUnit": "F",
+                "temperatureTrend": null,
+                "windSpeed": "5 mph",
+                "windDirection": "SE",
+                "icon": "https://api.weather.gov/icons/land/night/sct?size=medium",
+                "shortForecast": "Partly Cloudy",
+                "detailedForecast": "Partly cloudy, with a low around 39."
+            },
+            {
+                "number": 13,
+                "name": "Monday",
+                "startTime": "2021-11-08T06:00:00-06:00",
+                "endTime": "2021-11-08T18:00:00-06:00",
+                "isDaytime": true,
+                "temperature": 62,
+                "temperatureUnit": "F",
+                "temperatureTrend": null,
+                "windSpeed": "5 to 15 mph",
+                "windDirection": "SE",
+                "icon": "https://api.weather.gov/icons/land/day/sct?size=medium",
+                "shortForecast": "Mostly Sunny",
+                "detailedForecast": "Mostly sunny, with a high near 62."
+            },
+            {
+                "number": 14,
+                "name": "Monday Night",
+                "startTime": "2021-11-08T18:00:00-06:00",
+                "endTime": "2021-11-09T06:00:00-06:00",
+                "isDaytime": false,
+                "temperature": 45,
+                "temperatureUnit": "F",
+                "temperatureTrend": null,
+                "windSpeed": "10 mph",
+                "windDirection": "S",
+                "icon": "https://api.weather.gov/icons/land/night/few?size=medium",
+                "shortForecast": "Mostly Clear",
+                "detailedForecast": "Mostly clear, with a low around 45."
+            }
+        ]
+    }
+}
