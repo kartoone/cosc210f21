@@ -29,29 +29,49 @@ public class Parsing {
 	//		- writeObject() and readObject()
 	//		- the object you are trying to save MUST implement the Serializable interface.
 	private static void serializationDemo() throws Exception {	
-		// prep some data
+		// Create the data we want to store
+		String records[][] = new String[2][];
+		records[0] = new String[] { "Brian Toone", "Grad", "Hoover, Alabama" };
+		records[1] = new String[] { "JaKia Hood", "Junior", "Fairfield, Alabama" };
+
+		// Setup the object output stream for serialization
+		FileOutputStream fout = new FileOutputStream("records.bin");
+		ObjectOutputStream out = new ObjectOutputStream(fout);
+		out.writeObject(records);
+		out.close();
+
+		// At some point later, you can then read the data back directly into Java objects
+		FileInputStream fin = new FileInputStream("records.bin");
+		ObjectInputStream in = new ObjectInputStream(fin);
+		
+		// You've got to know exactly what type of object (and in what order) you stored the data into the file
+		String records2[][] = (String[][]) in.readObject();
+		System.out.println(records[1][2]);
+		in.close();
+		
+		// Another example with different types of data
 		String name = "Brian Toone";
 		int age = 45;
 		double height = 5.75; // 5 foot, 9 inches
 		boolean isFaculty = true;
 		
 		// write to a file
-		FileOutputStream fout = new FileOutputStream("objects.ser");
-		ObjectOutputStream out = new ObjectOutputStream(fout);
-		out.writeObject(name);
-		out.writeObject(age);
-		out.writeObject(height);
-		out.writeObject(isFaculty);
-		out.close();
-		
+		FileOutputStream fout2 = new FileOutputStream("objects.ser");
+		ObjectOutputStream out2 = new ObjectOutputStream(fout2);
+		out2.writeObject(name);
+		out2.writeObject(age);
+		out2.writeObject(height);
+		out2.writeObject(isFaculty);
+		out2.close();
+
 		// read back from the same file
-		FileInputStream fin = new FileInputStream("objects.ser");
-		ObjectInputStream in = new ObjectInputStream(fin);
-		System.out.println(in.readObject());
-		System.out.println(in.readObject());
-		System.out.println(in.readObject());
-		System.out.println(in.readObject());
-		in.close();
+		FileInputStream fin2 = new FileInputStream("objects.ser");
+		ObjectInputStream in2 = new ObjectInputStream(fin2);
+		System.out.println(in2.readObject());
+		System.out.println(in2.readObject());
+		System.out.println(in2.readObject());
+		System.out.println(in2.readObject());
+		in2.close();
 	}
 	
 	// parsing a text file
@@ -60,9 +80,16 @@ public class Parsing {
 	private static void parseTextDemo() throws Exception {
 		// TEXT data
 		Scanner in = new Scanner(new File("nws.txt"));
+		String jsonData = "";
 		while (in.hasNextLine()) {
-			System.out.println(in.nextLine());
-		}		
+			String line = in.nextLine();
+//			System.out.println(line);
+			jsonData += line;
+		}
+		// PARSE the JSON string into a JSON object
+		JSONObject json = new JSONObject(jsonData);
+		int afternoonTemp = json.getJSONObject("properties").getJSONArray("periods").getJSONObject(0).getInt("temperature");
+		System.out.println(afternoonTemp);
 	}
 
 	// parsing a binary file
@@ -72,6 +99,8 @@ public class Parsing {
 		byte[] bytes = Files.readAllBytes(Paths.get("2021-10-29-07-13-16.fit"));
 		System.out.println(bytes.length);
 		System.out.println(bytes[0]);
+		System.out.println(bytes[1]);
+		System.out.println(bytes[9]);
 	}
 
 }
