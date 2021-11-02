@@ -24,8 +24,24 @@ public class Parsing {
 		serializationDemo();
 	}
 		
-	private static void serializationDemo() {
-
+	private static void serializationDemo() throws Exception {
+		String records[][] = new String[2][];
+		records[0] = new String[] { "Brian Toone", "Grad", "Hoover, Alabama" };
+		records[1] = new String[] { "JaKia Hood", "Junior", "Fairfield, Alabama" };
+		FileOutputStream fout = new FileOutputStream("records.bin");
+		ObjectOutputStream out = new ObjectOutputStream(fout);
+		out.writeObject(records);
+		out.close();
+		
+		// Two hours later ...
+		FileInputStream fin = new FileInputStream("records.bin");
+		ObjectInputStream in = new ObjectInputStream(fin);
+		
+		String records2[][] = (String[][]) in.readObject();
+		System.out.println(records[1][2]);
+		out.close();
+		
+		
 		
 	}
 	
@@ -35,9 +51,16 @@ public class Parsing {
 	private static void parseTextDemo() throws Exception {
 		// TEXT data
 		Scanner in = new Scanner(new File("nws.txt"));
+		String jsonData = "";
 		while (in.hasNextLine()) {
-			System.out.println(in.nextLine());
-		}		
+			String line = in.nextLine();
+//			System.out.println(line);
+			jsonData += line;
+		}
+		// PARSE the JSON string into a JSON object
+		JSONObject json = new JSONObject(jsonData);
+		int afternoonTemp = json.getJSONObject("properties").getJSONArray("periods").getJSONObject(0).getInt("temperature");
+		System.out.println(afternoonTemp);
 	}
 
 	// parsing a binary file
@@ -47,6 +70,8 @@ public class Parsing {
 		byte[] bytes = Files.readAllBytes(Paths.get("2021-10-29-07-13-16.fit"));
 		System.out.println(bytes.length);
 		System.out.println(bytes[0]);
+		System.out.println(bytes[1]);
+		System.out.println(bytes[9]);
 	}
 
 }
