@@ -24,9 +24,34 @@ public class Parsing {
 		serializationDemo();
 	}
 		
-	private static void serializationDemo() {
-
+	// reading/writing Java objects directly from a file without having to worry about parsing
+	// 		- https://www.tutorialspoint.com/java/java_serialization.htm
+	//		- writeObject() and readObject()
+	//		- the object you are trying to save MUST implement the Serializable interface.
+	private static void serializationDemo() throws Exception {	
+		// prep some data
+		String name = "Brian Toone";
+		int age = 45;
+		double height = 5.75; // 5 foot, 9 inches
+		boolean isFaculty = true;
 		
+		// write to a file
+		FileOutputStream fout = new FileOutputStream("objects.ser");
+		ObjectOutputStream out = new ObjectOutputStream(fout);
+		out.writeObject(name);
+		out.writeObject(age);
+		out.writeObject(height);
+		out.writeObject(isFaculty);
+		out.close();
+		
+		// read back from the same file
+		FileInputStream fin = new FileInputStream("objects.ser");
+		ObjectInputStream in = new ObjectInputStream(fin);
+		System.out.println(in.readObject());
+		System.out.println(in.readObject());
+		System.out.println(in.readObject());
+		System.out.println(in.readObject());
+		in.close();
 	}
 	
 	// parsing a text file
