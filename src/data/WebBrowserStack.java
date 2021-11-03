@@ -10,8 +10,8 @@ public class WebBrowserStack {
 		int choice;
 		do {
 			System.out.println("Current stack size: " + backButtonStack.size());
-			for (int i=backButtonStack.size()-1; i>=0; i++) {
-				System.out.println(backButtonStack.array[i].toString());
+			for (int i=backButtonStack.size()-1; i>=0; i--) {
+				System.out.println(backButtonStack.get(i));
 			}
 			System.out.println();
 			System.out.println("MENU");
