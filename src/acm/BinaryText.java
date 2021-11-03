@@ -15,7 +15,7 @@ public class BinaryText {
 	
 	private static byte[] convertBytelist(ArrayList<Byte> bytelist) {
 		byte[] bytearray = new byte[bytelist.size()]; 
-		System.out.println("binary decimal hexadecimal ascii");
+		System.out.println("binary   dec hex  ascii");
 		for (int i=0; i<bytelist.size(); i++) {
 			// display first 10 bytes in variety of formats	
 			if (i<10) {
