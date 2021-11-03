@@ -1,5 +1,6 @@
 package acm;
 
+import java.util.ArrayList;
 // serialization vs parsing
 //   serialization - Java objects encoded as binary files when serialized and then automatically parsed when "de"-serialized
 //   parsing - importing text or binary data manually into the target programming language
