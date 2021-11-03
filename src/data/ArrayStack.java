@@ -52,5 +52,10 @@ public class ArrayStack<T> implements Stack<T> {
 	public boolean isEmpty() {
 		return size()==0;
 	}
+	
+	// cheat method: allows us to access ANY item on the stack
+	protected T get(int i) {
+		return array[i];
+	}
 
 }
