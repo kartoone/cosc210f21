@@ -5,13 +5,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ListQueueTest {
+class ArrayQueueTest {
 
 	protected Queue<Integer> q;
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		q = new ListQueue<>();
+		q = new ArrayQueueUnoptimized<>();
 		q.enqueue(7833);
 		q.enqueue(5422);
 		q.enqueue(7834);
@@ -58,7 +58,7 @@ class ListQueueTest {
 			assertEquals(7834, q.front());
 			q.dequeue();
 			q.front();
-			fail("should have thrown exception");
+			fail("should have thrown an error");
 		} catch (EmptyQueueException e) {
 			
 		}
@@ -85,7 +85,7 @@ class ListQueueTest {
 			q.dequeue();
 			assertTrue(q.isEmpty());
 			// let's test a queue that is empty from the beginning below:
-			q = new ListQueue<>();
+			q = new ArrayQueueUnoptimized<>();
 			assertTrue(q.isEmpty());
 		} catch (Exception ex) {
 			
