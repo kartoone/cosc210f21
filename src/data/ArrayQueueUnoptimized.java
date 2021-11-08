@@ -33,13 +33,12 @@ public class ArrayQueueUnoptimized<T> implements Queue<T> {
 		if (isEmpty()) {
 			throw new EmptyQueueException();
 		}
-		T frontitem = array[front];
 		// unoptimized version: shift all the other items over one spot to the left
-		for (int i = 0; i < array.length-1; i++) {
+		for (int i = 0; i < rear-1; i++) {
 			array[i] = array[i+1];
 		}
 		rear--;
-		return frontitem;
+		return array[front];
 	}
 
 	@Override

@@ -11,10 +11,25 @@ class ArrayQueueTest {
 	
 	@BeforeEach
 	void setUp() throws Exception {
-		q = new ArrayQueueUnoptimized<>();
+		q = new ArrayQueue<>();
 		q.enqueue(7833);
 		q.enqueue(5422);
 		q.enqueue(7834);
+	}
+	
+	@Test
+	void testWraparound() {
+		try {
+			q.dequeue();
+			q.enqueue(1);
+			q.enqueue(2);
+			assertEquals(4, q.size());
+			assertEquals(5422, q.front());
+			q.enqueue(3);
+			
+		} catch (Exception ex) {
+			fail("Should not have thrown exception.");
+		}
 	}
 
 	@Test
@@ -28,6 +43,13 @@ class ArrayQueueTest {
 			q.dequeue();
 			q.dequeue();
 			assertEquals(1234, q.front());
+			q.dequeue();
+			assertTrue(q.isEmpty());
+			for (int i=0; i<996; i++) {
+				q.enqueue(i);
+				q.dequeue();
+			}
+			q.enqueue(999);
 		} catch (EmptyQueueException e) {
 			// this intentionally blank
 		}
@@ -85,7 +107,7 @@ class ArrayQueueTest {
 			q.dequeue();
 			assertTrue(q.isEmpty());
 			// let's test a queue that is empty from the beginning below:
-			q = new ArrayQueueUnoptimized<>();
+			q = new ArrayQueue<>();
 			assertTrue(q.isEmpty());
 		} catch (Exception ex) {
 			

@@ -2,8 +2,8 @@ package data;
 
 public class ArrayQueue<T> implements Queue<T> {
 
-	public static final int DEFAULT_MAXSIZE = 1000; // pretty small max, must be a memory constrained system	
-	protected int maxsize; // the actual max size
+	public static final int DEFAULT_MAXSIZE = 5; // pretty small max, must be a memory constrained system	
+	protected int size;
 	protected T[] array;   // the storage place for all our data
 	protected int front;   // keep track of the index that represents the front of our queue
 	protected int rear;    // keep track of the index that represents the rear of our queue
@@ -13,7 +13,7 @@ public class ArrayQueue<T> implements Queue<T> {
 	}
 	
 	public ArrayQueue(int maxsize) {
-		this.maxsize = maxsize;
+		this.size = 0;
 		this.array = (T[])new Object[maxsize];
 		this.front = 0;
 		this.rear = 0;
@@ -22,10 +22,12 @@ public class ArrayQueue<T> implements Queue<T> {
 	
 	@Override
 	public void enqueue(T data) {
-		if (rear == array.length) {
+		if (size==array.length) {
 			throw new Error("The queue is full!");
 		}
-		array[rear++] = data;		
+		array[rear] = data;
+		rear = (rear + 1) % array.length;
+		size++;
 	}
 
 	@Override
@@ -33,13 +35,10 @@ public class ArrayQueue<T> implements Queue<T> {
 		if (isEmpty()) {
 			throw new EmptyQueueException();
 		}
-		T frontitem = array[front];
-		// unoptimized version: shift all the other items over one spot to the left
-		for (int i = 0; i < array.length-1; i++) {
-			array[i] = array[i+1];
-		}
-		rear--;
-		return frontitem;
+		size--;
+		T dataitem = array[front];
+		front = (front+1) % array.length;
+		return dataitem;
 	}
 
 	@Override
@@ -52,12 +51,12 @@ public class ArrayQueue<T> implements Queue<T> {
 
 	@Override
 	public int size() {
-		return rear;
+		return size;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		return front==rear;
+		return size()==0;
 	}
 
 }
