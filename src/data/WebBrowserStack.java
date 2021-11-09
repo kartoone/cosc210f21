@@ -5,10 +5,15 @@ import java.util.Scanner;
 public class WebBrowserStack {
 
 	public static void main(String[] args) {
-		Stack<String> backButtonStack = new ArrayStack<>();
+		ArrayStack<String> backButtonStack = new ArrayStack<>();
 		Scanner in = new Scanner(System.in);
 		int choice;
 		do {
+			System.out.println("Current stack size: " + backButtonStack.size());
+			for (int i=backButtonStack.size()-1; i>=0; i--) {
+				System.out.println(backButtonStack.get(i));
+			}
+			System.out.println();
 			System.out.println("MENU");
 			System.out.println(" 1. Goto URL");
 			System.out.println(" 2. Press Back Button");
