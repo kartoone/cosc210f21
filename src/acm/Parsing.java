@@ -84,7 +84,7 @@ public class Parsing {
 		String jsonData = "";
 		while (in.hasNextLine()) {
 			String line = in.nextLine();
-//			System.out.println(line);
+//			System.out+.println(line);
 			jsonData += line;
 		}
 		// PARSE the JSON string into a JSON object
