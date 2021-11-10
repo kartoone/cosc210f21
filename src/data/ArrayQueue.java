@@ -2,12 +2,13 @@ package data;
 
 public class ArrayQueue<T> implements Queue<T> {
 
-	public static final int DEFAULT_MAXSIZE = 5; // pretty small max, must be a memory constrained system	
-	protected int size;
+	public static final int DEFAULT_MAXSIZE = 1000; // pretty small max, must be a memory constrained system	
+	protected int size;    // the number of items currently in the queue
 	protected T[] array;   // the storage place for all our data
 	protected int front;   // keep track of the index that represents the front of our queue
 	protected int rear;    // keep track of the index that represents the rear of our queue
 	
+	// default constructor, i.e., a constructor that takes no params
 	public ArrayQueue() {
 		this(DEFAULT_MAXSIZE);
 	}

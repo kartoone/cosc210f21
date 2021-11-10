@@ -20,12 +20,35 @@ class ArrayQueueTest {
 	@Test
 	void testWraparound() {
 		try {
-			q.dequeue();
-			q.enqueue(1);
-			q.enqueue(2);
-			assertEquals(4, q.size());
-			assertEquals(5422, q.front());
-			q.enqueue(3);
+			ArrayQueue<String> airportq = new ArrayQueue<>(5);
+			airportq.enqueue("BHM");
+			airportq.enqueue("ATL");
+			airportq.enqueue("MSP");
+			airportq.enqueue("JFK");
+			airportq.enqueue("DFW");
+			System.out.println("We figured out the 737 max problem!");
+			String airport = airportq.dequeue();
+			assertEquals("BHM", airport);
+			System.out.println(airport + " being processed now.");
+			airport = airportq.dequeue();
+			assertEquals("ATL", airport);
+			System.out.println(airport + " being processed now.");
+			airportq.enqueue("MIA");
+			assertEquals(4, airportq.size());
+			assertEquals("MSP", airportq.front());
+			airport = airportq.dequeue();
+			assertEquals("MSP", airport);
+			System.out.println(airport + " being processed now.");
+			airport = airportq.dequeue();
+			assertEquals("JFK", airport);
+			System.out.println(airport + " being processed now.");
+			airport = airportq.dequeue();
+			assertEquals("DFW", airport);
+			System.out.println(airport + " being processed now.");
+			airport = airportq.dequeue();
+			assertEquals("MIA", airport);
+			System.out.println(airport + " being processed now.");
+			assertTrue(airportq.isEmpty());
 			
 		} catch (Exception ex) {
 			fail("Should not have thrown exception.");
