@@ -49,13 +49,12 @@ public class BuggyRobot {
 		for (int i=0; i<code.length(); i++) {
 			cmds.enqueue(code.charAt(i));
 		}		
-
-		// it's now later
-		
+	
 		int r = robot_r; // current robot r position
 		int c = robot_c; // current robot c position
 		
-		int i=0;
+		// it's now later, so let's go ahead and process all the commands from the queue
+		int i=0; // keep tracks of how many "steps" it has taken to solve the map
 		while(!cmds.isEmpty()) {
 			i++;
 			char cmd = cmds.dequeue();
