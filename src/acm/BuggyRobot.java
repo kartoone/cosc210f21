@@ -1,18 +1,23 @@
 package acm;
 
 import java.util.Scanner;
+
+import data.EmptyQueueException;
+import data.ListQueue;
+import data.Queue;
+
 import java.io.*;
 
 public class BuggyRobot {
 
-	static char map[][];
-	static int rows;
-	static int cols;
-	static int robot_r;
-	static int robot_c;
-	static String buggycode;
+	static char map[][];	 // stores the map data
+	static int rows;         // # rows in the map
+	static int cols;		 // # cols in the map
+	static int robot_r;		 // current robot location (row)
+	static int robot_c;      // current robot location (column)
+	static String buggycode; // the "buggy" program controlling the robot (e.g., LRDD)
 	
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws FileNotFoundException, EmptyQueueException {
 		Scanner in = new Scanner(new File("buggy.txt"));
 		// read in the dimensions from the first line of the file
 		rows = in.nextInt();
@@ -24,6 +29,7 @@ public class BuggyRobot {
 			for (int c=0; c<cols; c++) {
 				map[r][c] = row.charAt(c);
 				if (map[r][c]=='R') {
+					// we found the robot! set its location
 					robot_r = r;
 					robot_c = c;
 				}
@@ -37,16 +43,28 @@ public class BuggyRobot {
 	}
 
 	// strategy: go ahead and follow the direction no matter what ... see where you land ... and then UNDO if invalid position (either off the edge of the map or on top of an internal wall)
-	static void followCode(String code) {
+	static void followCode(String code) throws EmptyQueueException {
+		// queue up all the commands for processing later
+		Queue<Character> cmds = new ListQueue<>();
+		for (int i=0; i<code.length(); i++) {
+			cmds.enqueue(code.charAt(i));
+		}		
+
+		// it's now later
+		
 		int r = robot_r; // current robot r position
 		int c = robot_c; // current robot c position
 		
-		for (int i=0; i<code.length(); i++) {
-			char d = code.charAt(i);
-			System.out.println("Step " + i + ": " + d);
-			int old_r = r;
+		int i=0;
+		while(!cmds.isEmpty()) {
+			i++;
+			char cmd = cmds.dequeue();
+			System.out.println("Step " + i + ": " + cmd);
+			int old_r = r; // save the current location in case we should not have followed the command
 			int old_c = c;
-			switch (d) {
+			
+			// follow the command no matter what...
+			switch (cmd) {
 			case 'L':
 				c--;
 				break;
@@ -65,13 +83,15 @@ public class BuggyRobot {
 				r = old_r; // restore the old position
 				c = old_c;
 			} else {
+				map[old_r][old_c] = '.';
 				if (map[r][c]=='E') {
+					map[r][c] = 'R';
+					printMap();
 					System.out.println("hit exit in " + i + " move(s).");
 					break; // kicks us completely out of for loop
 				} else {
 					// update the map to reflect the robot's new position
 					map[r][c] = 'R';
-					map[old_r][old_c] = '.';
 				}
 			}
 			printMap();

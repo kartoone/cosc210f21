@@ -1,4 +1,6 @@
-2 4
+4 4
 R.#.
-#..E
-RRUUDDRRUUUU
+..#.
+....
+..#E
+RRUUDDRRD
