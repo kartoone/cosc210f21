@@ -10,6 +10,7 @@ public class ListQueue<T> implements Queue<T> {
 	public void enqueue(T data) {
 		// add at the "rear" of the queue
 		// we are designating the end of the list as the "rear"
+		// the ArrayList add() method adds at the end by default
 		list.add(data);
 	}
 
@@ -18,7 +19,7 @@ public class ListQueue<T> implements Queue<T> {
 		if (isEmpty()) {
 			throw new EmptyQueueException();
 		}
-		// remove from the "front" of the queue which is the item at position 0
+		// remove from the "front" of the queue which is always the item at position 0
 		return list.remove(0);
 	}
 

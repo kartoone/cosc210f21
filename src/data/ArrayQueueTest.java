@@ -20,7 +20,7 @@ class ArrayQueueTest {
 	@Test
 	void testWraparound() {
 		try {
-			ArrayQueue<String> airportq = new ArrayQueue<>(5);
+			ArrayQueue<String> airportq = new ArrayQueue<>(5);			
 			airportq.enqueue("BHM");
 			airportq.enqueue("ATL");
 			airportq.enqueue("MSP");
