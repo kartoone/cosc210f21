@@ -15,13 +15,14 @@ public class TreeNode<T> implements Node<T> {
 	}
 	
 	// No children, possibly a leaf node
-	public TreeNode(T data, Node<T> parent) {
+	public TreeNode(T data, TreeNode<T> parent) {
 		this(data);
-		this.parent = parent;
+		parent.children.add(this); // tell the parent that it has a child
+		this.parent = parent;      // tell the child who its parent is
 	}
 	
 	// This constructor frequently used when restructuring a tree
-	public TreeNode(T data, Node<T> parent, ArrayList<Node<T>> children) {
+	public TreeNode(T data, TreeNode<T> parent, ArrayList<Node<T>> children) {
 		this(data, parent);
 		this.children = children;
 	}

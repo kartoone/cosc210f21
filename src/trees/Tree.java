@@ -38,6 +38,18 @@ public interface Tree<T> {
 	public ArrayList<Node<T>> siblings(Node<T> n);
 
 	/**
+	 * Returns the depth of node n (counting from 0)
+	 * @param n - the node whose depth we want
+	 * @return the depth of that node
+	 */
+	public int depth(Node<T> n);
+	
+	/**
+	 * Returns the height of the tree (i.e., the length of the deepest path, counting from 0)
+	 */
+	public int height();
+	
+	/**
 	 * Returns the number of nodes in the tree.
 	 * @return the number of nodes in the tree.
 	 */
