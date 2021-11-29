@@ -22,8 +22,15 @@ public class GenericTreeDemo {
 		tree.addChild(jnode, "p");
 		tree.addChild(jnode, "q");
 		System.out.println(tree.size());
-		System.out.println("countDescendents(root)...");
-		System.out.println(tree.countDescendents(tree.rootNode));
+		//System.out.println("countDescendents(root)...");
+		//System.out.println(tree.countDescendents(tree.rootNode));
+		//System.out.println("countDescendents(bnode)");
+		//System.out.println(tree.countDescendents(bnode));
+//		System.out.println("countDescendents(cnode)");
+//		System.out.println(tree.countDescendents(cnode));
+		System.out.println("countDescendents(gnode)");
+		System.out.println(tree.countDescendents(gnode));
+		System.out.println(tree.depth(tree.root()));
 	}
 
 }

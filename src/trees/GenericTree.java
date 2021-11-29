@@ -20,7 +20,8 @@ public class GenericTree<T> implements Tree<T> {
 	}
 	
 	public GenericTree(TreeNode<T> rootNode) {
-		size=1+countDescendents(rootNode);
+		size=1+countDescendents(rootNode); // design decision: preserve the children of the root node
+		rootNode.parent = null;  // design decision: if the rootNode already had a parent we are eliminating the parent from the tree
 		this.rootNode = rootNode;
 	}
 	
@@ -97,8 +98,11 @@ public class GenericTree<T> implements Tree<T> {
 
 	@Override
 	public int depth(Node<T> n) {
-		// TODO Auto-generated method stub
-		return 0;
+		if (parent(n)==null) {
+			return 0; // base case: made it to the root
+		} else {
+			return 1+depth(parent(n));
+		}
 	}
 
 	@Override
