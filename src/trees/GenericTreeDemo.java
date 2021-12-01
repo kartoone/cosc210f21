@@ -38,6 +38,7 @@ public class GenericTreeDemo {
 		System.out.println("tree.countDescendents(bnode): " + tree.countDescendents(bnode));
 		System.out.println("tree.depth(tree.root()):" + tree.depth(tree.root()));
 		System.out.println("tree.depth(gnode): " + tree.depth(gnode));
+		System.out.println("tree.siblings(bnode): " + tree.siblings(bnode));
 		System.out.println("tree:");
 		System.out.println(tree);
 		System.out.println("tree.prettyString():");

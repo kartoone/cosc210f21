@@ -57,5 +57,10 @@ public class TreeNode<T> implements Node<T> {
 	public void setElement(T newdata) {
 		data = newdata;
 	}
+	
+	@Override
+	public String toString() {
+		return data.toString();
+	}
 
 }

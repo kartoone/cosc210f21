@@ -64,10 +64,22 @@ public class GenericTree<T> implements Tree<T> {
 
 	@Override
 	public ArrayList<Node<T>> leaves() {
-		// TODO Auto-generated method stub
-		return null;
+		return leavesHelper(rootNode, new ArrayList<Node<T>>());
 	}
 
+	protected ArrayList<Node<T>> leavesHelper(Node<T> n, ArrayList<Node<T>> leaflist) {
+		ArrayList<Node<T>> retval = new ArrayList<>();
+		// base case: n is a leaf
+		// recursive step: n is NOT a leaf
+		if (true) {
+			
+		} else {
+			
+		}
+		return retval;
+	}
+
+	
 	@Override
 	public Node<T> parent(Node<T> n) {
 		return ((TreeNode<T>)n).parent;
@@ -78,10 +90,17 @@ public class GenericTree<T> implements Tree<T> {
 		return ((TreeNode<T>)n).children;
 	}
 
+	/**
+	 * Return the siblings of node n (but don't include n)
+	 */
 	@Override
 	public ArrayList<Node<T>> siblings(Node<T> n) {
-		// TODO Auto-generated method stub
-		return null;
+		// Strategy: 
+		// Step 1: get the children of the parent of n
+		ArrayList<Node<T>> children = children(parent(n));
+		// Step 2: filter out n
+		children.remove(n);
+		return children;
 	}
 
 	@Override
@@ -94,9 +113,16 @@ public class GenericTree<T> implements Tree<T> {
 		return size()==0;
 	}
 
+	/**
+	 * Recursively calculate the depth of node n.
+	 *   base case: we made it to the root (i.e., node n has no parent)
+	 *   recursive step: n is NOT the root (yet)
+	 *  @param n - the node whose depth we are calculating
+	 *  @return - the depth of node n
+	 */
 	@Override
 	public int depth(Node<T> n) {
-		if (parent(n)==null) {
+		if (parent(n)==null) { // equivalent to n==rootNode
 			return 0; // base case: made it to the root
 		} else {
 			return 1+depth(parent(n));
@@ -105,8 +131,19 @@ public class GenericTree<T> implements Tree<T> {
 
 	@Override
 	public int height() {
-		// TODO Auto-generated method stub
-		return 0;
+		// Algorithm: find the maximum depth of all the leaves, that is the height
+		// Step 1: get all the leaves
+		// Step 2: iterate through all the leaves and find each leaf's depth
+		// Step 3: return the maximum depth found
+		ArrayList<Node<T>> leaves = leaves();
+		int max = 0;
+		for (Node<T> leaf : leaves) {
+			int leafdepth = depth(leaf);
+			if (leafdepth>max) {
+				max = leafdepth;
+			}
+		}
+		return max;
 	}
 	
 	@Override
