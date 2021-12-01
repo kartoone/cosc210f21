@@ -46,12 +46,10 @@ public class GenericTree<T> implements Tree<T> {
 		ArrayList<Node<T>> children = children(n);
 		if (children.size()==0) {
 			// base case: no children!
-			System.out.println(n.getElement() + " 0 BASE");
 			return 0;
 		} else {
 			// recursive step: node has children!
 			int descendents = children.size();
-			System.out.println(n.getElement() + " " + descendents + " RS");
 			for (Node<T> child : children) {
 				descendents = descendents + countDescendents(child);
 			}
@@ -110,5 +108,51 @@ public class GenericTree<T> implements Tree<T> {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	@Override
+	public String toString() {
+		return toStringHelperSpaces(root(), 0);
+	}
+	
+	protected String toStringHelperSpaces(Node<T> n, int numspaces) {
+		String retval = "";
+		for (int i=0; i<numspaces; i++) {
+			retval += " ";
+		}
+		retval += n.getElement() + "\n";
+		ArrayList<Node<T>> children = children(n);
+		for (Node<T> child : children) {
+		    retval += toStringHelperSpaces(child, numspaces+2);				
+		}
+		return retval;
+	}
 
+	public String prettyString() {
+		ArrayList<Boolean>lastchildhistory = new ArrayList<>();
+		return toStringHelperLines(root(), 0, lastchildhistory);
+	}
+
+	protected String toStringHelperLines(Node<T> n, int numspaces, ArrayList<Boolean> lastchildhistory) {
+		String retval = " ";
+		for (int i=0; i<numspaces; i++) {
+			if (i%2==0 && i<numspaces-2) {
+				retval += lastchildhistory.get(i/2)?" ":"│";
+			} else if (i==numspaces-2) {
+				retval += lastchildhistory.get(i/2)?"└":"├";
+			} else if (i<numspaces-2) {
+				retval += " ";
+			} else {
+				retval += "─";
+			}
+		}
+		retval += n.getElement() + "\n";
+		ArrayList<Node<T>> children = children(n);
+		for (int i=0; i<children.size(); i++) {
+			Node<T> child = children.get(i);
+			ArrayList<Boolean> lastchildhistoryR = (ArrayList<Boolean>)lastchildhistory.clone();
+			lastchildhistoryR.add(i==children.size()-1);
+			retval += toStringHelperLines(child, numspaces+2, lastchildhistoryR);				
+		}
+		return retval;
+	}
 }

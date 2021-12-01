@@ -4,6 +4,19 @@ public class GenericTreeDemo {
 
 	public static void main(String[] args) {
 		// Example tree from https://walker.cs.grinnell.edu/courses/207.sp12/readings/reading-intro-trees.shtml
+/*
+ * 								     a
+ * 								  /  |  \
+ *                               /   |   \
+ *                              /    |    \
+ * 							   /     |     \
+ * 							  b      c      d
+ * 							 / \     |    / | \
+ *                          e   f    g   h  i  j
+ *                             / \  / \     | / \
+ *                            k   l m  n    o p q
+ * 
+ */
 		GenericTree<String> tree = new GenericTree<>("a");
 		TreeNode<String> bnode = tree.addChild((TreeNode<String>)tree.root(), "b");
 		TreeNode<String> cnode = tree.addChild((TreeNode<String>)tree.root(), "c");
@@ -21,16 +34,14 @@ public class GenericTreeDemo {
 		TreeNode<String> jnode = tree.addChild(dnode, "j");
 		tree.addChild(jnode, "p");
 		tree.addChild(jnode, "q");
-		System.out.println(tree.size());
-		//System.out.println("countDescendents(root)...");
-		//System.out.println(tree.countDescendents(tree.rootNode));
-		//System.out.println("countDescendents(bnode)");
-		//System.out.println(tree.countDescendents(bnode));
-//		System.out.println("countDescendents(cnode)");
-//		System.out.println(tree.countDescendents(cnode));
-		System.out.println("countDescendents(gnode)");
-		System.out.println(tree.countDescendents(gnode));
-		System.out.println(tree.depth(tree.root()));
+		System.out.println("tree.size(): " + tree.size());
+		System.out.println("tree.countDescendents(bnode): " + tree.countDescendents(bnode));
+		System.out.println("tree.depth(tree.root()):" + tree.depth(tree.root()));
+		System.out.println("tree.depth(gnode): " + tree.depth(gnode));
+		System.out.println("tree:");
+		System.out.println(tree);
+		System.out.println("tree.prettyString():");
+		System.out.println(tree.prettyString());
 	}
 
 }
