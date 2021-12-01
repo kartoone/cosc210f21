@@ -5,13 +5,13 @@ public class GenericTreeDemo {
 	public static void main(String[] args) {
 		// Example tree from https://walker.cs.grinnell.edu/courses/207.sp12/readings/reading-intro-trees.shtml
 /*
- * 								     a
- * 								  /  |  \
+ *                                   a
+ *                                /  |  \
  *                               /   |   \
  *                              /    |    \
- * 							   /     |     \
- * 							  b      c      d
- * 							 / \     |    / | \
+ *                             /     |     \
+ *                            b      c      d
+ *                           / \     |    / | \
  *                          e   f    g   h  i  j
  *                             / \  / \     | / \
  *                            k   l m  n    o p q
