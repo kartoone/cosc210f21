@@ -1,25 +1,23 @@
 package trees;
 
-public class GenericTreeDemo {
+public class BinaryTreeDemo {
 
 	public static void main(String[] args) {
 		// Example tree from https://walker.cs.grinnell.edu/courses/207.sp12/readings/reading-intro-trees.shtml
 /*
- *                                   a
- *                                /  |  \
- *                               /   |   \
- *                              /    |    \
- *                             /     |     \
- *                            b      c      d
- *                           / \     |    / | \
- *                          e   f    g   h  i  j
- *                             / \  / \     | / \
- *                            k   l m  n    o p q
+ *                                a
+ *                              /   \
+ *                             /     \
+ *                            b      c
+ *                           / \     |
+ *                          e   f    g
+ *                             / \  / \
+ *                            k   l m  n
  * 
  */
-		GenericTree<String> tree = new GenericTree<>("a");
-		TreeNode<String> bnode = tree.addChild((TreeNode<String>)tree.root(), "b");
-		TreeNode<String> cnode = tree.addChild((TreeNode<String>)tree.root(), "c");
+		BinaryTree<String> tree = new BinaryTree<>("a");
+		BinaryTreeNode<String> bnode = tree.setLeft((BinaryTreeNode<String>)tree.root(), "b");
+		BinaryTreeNode<String> cnode = tree.setRight((BinaryTreeNode<String>)tree.root(), "c");
 		TreeNode<String> dnode = tree.addChild((TreeNode<String>)tree.root(), "d");
 		tree.addChild(bnode, "e");
 		TreeNode<String> fnode = tree.addChild(bnode, "f");

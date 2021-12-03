@@ -2,24 +2,24 @@ package trees;
 
 import java.util.ArrayList;
 
-public class GenericTree<T> implements Tree<T> {
+public class BinaryTree<T> implements Tree<T> {
 
 	protected Node<T> rootNode;
 	protected int size;				// keeps track of how many nodes are in the tree ... MUST be updated in many places
 	
 	// Default constructor for the "mythical" empty tree
-	public GenericTree() {
+	public BinaryTree() {
 		size=0;
 		rootNode=null;
 	}
 	
 	// Typical root data constructor
-	public GenericTree(T rootData) {
+	public BinaryTree(T rootData) {
 		size=1;
-		rootNode = new TreeNode<>(rootData);
+		rootNode = new BinaryTreeNode<>(rootData);
 	}
 	
-	public GenericTree(TreeNode<T> rootNode) {
+	public BinaryTree(BinaryTreeNode<T> rootNode) {
 		size=1+countDescendents(rootNode); // design decision: preserve the children of the root node
 		rootNode.parent = null;  // design decision: if the rootNode already had a parent we are eliminating the parent from the tree
 		this.rootNode = rootNode;
@@ -28,14 +28,38 @@ public class GenericTree<T> implements Tree<T> {
 	// Tree manipulation methods
 	// DON'T FORGET TO UPDATE SIZE CORRECTLY!!!!
 	/**
-	 * Create a new node to host childData and set its parent to n
+	 * Create a new node to host childData and set its parent to n and tell the parent it has a new left child
 	 * @param n - the parent of the new node
 	 * @param childData - the data for the new child node
 	 * @return the newly created child node
 	 */
-	public TreeNode<T> addChild(TreeNode<T> n, T childData) {
-		TreeNode<T> childNode = new TreeNode<>(childData, n);
-		size++; // only increment size by one b/c we are only creating one new node
+	public BinaryTreeNode<T> setLeft(BinaryTreeNode<T> n, T childData) {
+		if (n.left != null) {
+			size = size - countDescendents(n.left);
+		} else {
+			size++; // only increment size by one b/c we are only creating one new node
+		}
+		BinaryTreeNode<T> childNode = new BinaryTreeNode<>(childData);
+		childNode.parent = n;
+		n.left = childNode;
+		return childNode;
+	}
+	
+	/**
+	 * Create a new node to host childData and set its parent to n and tell the parent it has a new left child
+	 * @param n - the parent of the new node
+	 * @param childData - the data for the new child node
+	 * @return the newly created child node
+	 */
+	public BinaryTreeNode<T> setRight(BinaryTreeNode<T> n, T childData) {
+		if (n.right != null) {
+			size = size - countDescendents(n.right);
+		} else {
+			size++; // only increment size by one b/c we are only creating one new node
+		}
+		BinaryTreeNode<T> childNode = new BinaryTreeNode<>(childData);
+		childNode.parent = n;
+		n.right = childNode;
 		return childNode;
 	}
 	
@@ -86,12 +110,35 @@ public class GenericTree<T> implements Tree<T> {
 	
 	@Override
 	public Node<T> parent(Node<T> n) {
-		return ((TreeNode<T>)n).parent;
+		return ((BinaryTreeNode<T>)n).parent;
 	}
 
 	@Override
 	public ArrayList<Node<T>> children(Node<T> n) {
-		return ((TreeNode<T>)n).children;
+		ArrayList<Node<T>> tmpchildrenlist = new ArrayList<>();
+		if (hasLeft(n)) {
+			tmpchildrenlist.add(left(n));
+		}
+		if (hasRight(n)) {
+			tmpchildrenlist.add(right(n));
+		}
+		return tmpchildrenlist;
+	}
+
+	public Node<T> right(Node<T> n) {
+		return ((BinaryTreeNode<T>)n).right;
+	}
+
+	public boolean hasRight(Node<T> n) {
+		return right(n)!=null;
+	}
+
+	public Node<T> left(Node<T> n) {
+		return ((BinaryTreeNode<T>)n).left;
+	}
+
+	public boolean hasLeft(Node<T> n) {
+		return left(n)!=null;
 	}
 
 	/**
