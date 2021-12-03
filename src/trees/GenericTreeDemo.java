@@ -43,6 +43,8 @@ public class GenericTreeDemo {
 		System.out.println(tree);
 		System.out.println("tree.prettyString():");
 		System.out.println(tree.prettyString());
+		System.out.println("leaves: " + tree.leaves());
+		System.out.println("tree.height(): " + tree.height());
 	}
 
 }

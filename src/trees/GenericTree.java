@@ -64,21 +64,21 @@ public class GenericTree<T> implements Tree<T> {
 
 	@Override
 	public ArrayList<Node<T>> leaves() {
-		return leavesHelper(rootNode, new ArrayList<Node<T>>());
+		ArrayList<Node<T>> leaves = new ArrayList<>();
+		leavesHelper(rootNode, leaves);
+		return leaves;
 	}
 
-	protected ArrayList<Node<T>> leavesHelper(Node<T> n, ArrayList<Node<T>> leaflist) {
-		ArrayList<Node<T>> retval = new ArrayList<>();
+	protected void leavesHelper(Node<T> n, ArrayList<Node<T>> leaflist) {
 		// base case: n is a leaf
 		// recursive step: n is NOT a leaf
-		if (true) {
-			
+		ArrayList<Node<T>> children = children(n);
+		if (children.size()==0) {
+			// base case: we found a leaf!
 		} else {
-			
+			// recursive step: this node has children, let's recursively call the method again on each child
 		}
-		return retval;
 	}
-
 	
 	@Override
 	public Node<T> parent(Node<T> n) {
@@ -95,12 +95,14 @@ public class GenericTree<T> implements Tree<T> {
 	 */
 	@Override
 	public ArrayList<Node<T>> siblings(Node<T> n) {
-		// Strategy: 
-		// Step 1: get the children of the parent of n
-		ArrayList<Node<T>> children = children(parent(n));
-		// Step 2: filter out n
-		children.remove(n);
-		return children;
+		// Strategy: get the children of the parent of n - and add all the children to a new list except for the node n
+		ArrayList<Node<T>> siblings = new ArrayList<>();
+		for (Node<T> child: children(n)) {
+			if (child != n) {
+				siblings.add(child);
+			}
+		}
+		return siblings;
 	}
 
 	@Override
