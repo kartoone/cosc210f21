@@ -132,26 +132,6 @@ public class AdventDay4 {
 			System.out.println();
 		}
 		System.out.println();
-	}
-		
-	private static void puzzle2(int windowsize) throws FileNotFoundException {
-		Scanner filein = new Scanner(new File("day1a.txt"));
-		ArrayList<Integer> nums = new ArrayList<>();
-		while (filein.hasNextLine()) {
-			nums.add(Integer.parseInt(filein.nextLine()));
-		}
-		filein.close();
-		Integer lastsum = null;
-		int increasedcnt = 0;
-		for (int i=2; i<nums.size(); i++) {
-			int currentsum = nums.get(i-2) + nums.get(i-1) + nums.get(i);
-			if (lastsum != null && currentsum>lastsum) {
-				increasedcnt++;
-			}
-			lastsum = currentsum;
-		}
-		System.out.println(increasedcnt);		
-	}
-	
+	}	
 	
 }

@@ -50,40 +50,10 @@ public class AdventDay6 {
 		filein.close();
 
 		// procreate for d days
+		long total = 0;
 		for (int i=0; i<d; i++) {
-			ArrayList<Integer> swaparoo = new ArrayList<>();
-			for (int fi=0; fi<fish.size(); fi++) {
-				Integer f = fish.get(fi);
-				if (f==0) {
-					swaparoo.add(8);
-					// instead of adding back the "6" one ... go ahead and calculate how many it will reproduce and add that many fish 
-					swaparoo.add(6);
-				} else {
-					swaparoo.add(f-1);
-				}
-			}
-			fish = swaparoo;
+			
 		}
-	}
-	
-	private static long countOffspring(int f, int d) {
-		ArrayList<Integer> fishes = new ArrayList<>();
-		fishes.add(f);
-		for (int i=0; i<d; i++) {
-			ArrayList<Integer> swaparoo = new ArrayList<>();
-			for (int fi=0; fi<fishes.size(); fi++) {
-				Integer fish = fishes.get(fi);
-				if (fish==0) {
-					swaparoo.add(8);
-					swaparoo.add(6);
-				} else {
-					swaparoo.add(fish-1);
-				}
-			}
-			fishes = swaparoo;
-		}
-		return fishes.size();
-	}
-	
+	}	
 	
 }
