@@ -101,7 +101,10 @@ public class GenericTree<T> implements Tree<T> {
 	public ArrayList<Node<T>> siblings(Node<T> n) {
 		// Strategy: get the children of the parent of n - and add all the children to a new list except for the node n
 		ArrayList<Node<T>> siblings = new ArrayList<>();
-		for (Node<T> child: children(n)) {
+		if (n==rootNode) {
+			return siblings;
+		}
+		for (Node<T> child: children(parent(n))) {
 			if (child != n) {
 				siblings.add(child);
 			}
