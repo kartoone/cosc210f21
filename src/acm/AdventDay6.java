@@ -56,7 +56,7 @@ public class AdventDay6 {
 		// the way to interpret answers[f][d] is that whatever answer is at that location is 
 		// how many total fish will spawn from that one fish and its offspring 
 		// given the initial cycle day of "f" and "d" days left in the simulation
-		long answers[][] = new long[9][d+1];		
+		long answers[][] = new long[9][d+1];			
 		long total = 0;
 		for (Integer f: fish) {
 			total += countOffspring(f, d, answers);			
