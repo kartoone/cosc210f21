@@ -25,6 +25,13 @@ public class BinaryTree<T> implements Tree<T> {
 		this.rootNode = rootNode;
 	}
 	
+	public BinaryTreeNode setRoot(T rootData) {
+		size = 1;
+		BinaryTreeNode<T> rn = new BinaryTreeNode<>(rootData);
+		this.rootNode = rn;
+		return rn;
+	}
+	
 	// Tree manipulation methods
 	// DON'T FORGET TO UPDATE SIZE CORRECTLY!!!!
 	/**
