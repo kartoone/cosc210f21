@@ -1,6 +1,6 @@
 package trees;
 
-public class Term {
+public class Term implements Comparable<Term> {
 
 	protected String term;
 	protected String definition;
@@ -8,15 +8,15 @@ public class Term {
 		this.term = term;
 		this.definition = definition;
 	}
-	public boolean equals(String searchphrase) {
-		return term.equalsIgnoreCase(searchphrase);
+	
+	@Override
+	public int compareTo(Term otherterm) {
+		return (term.compareTo(otherterm.term));
 	}
-	public int compare(String otherterm) {
-		return term.compareTo(otherterm);
-	}
+	
 	@Override
 	public String toString() {
-		return term + definition;
+		return term;
 	}
 	
 }
