@@ -27,16 +27,18 @@ public class BinarySearchTreeDemo {
 		}
 		
 		// Display a random term!
-		System.out.println(terms.get((int)Math.floor(Math.random()*terms.size())));
+		Term randomTerm = terms.get((int)Math.floor(Math.random()*terms.size())); 
+		System.out.println(randomTerm.term + "\n" +randomTerm.definition);
 		
 		// Search for a term
 		System.out.print("Enter a term: ");
 		Scanner in = new Scanner(System.in);
 		String search = in.nextLine();
+		Term searchTerm = new Term(search,"");
 		String hit = "";
 		long start = System.nanoTime();
 		for (Term term : terms) {
-			if (term.equals(search)) {
+			if (term.compareTo(searchTerm)==0) {
 				hit = term.definition;
 				break;
 			}
@@ -48,6 +50,25 @@ public class BinarySearchTreeDemo {
 			System.out.println(hit);
 		}
 		System.out.println(end-start + " ns");
+		
+		BinarySearchTree<Term> bst = new BinarySearchTree<>();
+		for (Term t: terms) {
+			bst.addData(t);
+		}
+		start = System.nanoTime();
+		Node<Term> hitTerm = bst.searchTree(searchTerm);
+		boolean hitflag = true;
+		if(hitTerm.getElement()==null) {
+			hitflag = false;
+		}
+		end = System.nanoTime();
+		if (!hitflag) {
+			System.out.println("That term is not in FOLDOC");
+		} else {
+			System.out.println(hitTerm.getElement().term + "\n" + hitTerm.getElement().definition);
+		}
+		System.out.println(end-start + " ns");
+		System.out.println(bst);
 	}
 
 }
