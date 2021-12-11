@@ -5,13 +5,9 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class AdventAllDays {
+public class AdventDay3 {
 
 	public static void main(String[] args) throws FileNotFoundException {
-		day1a();
-		day1b(3);
-		day2a();
-		day2b();
 		day3a();
 		day3b();
 	}
@@ -99,84 +95,6 @@ public class AdventAllDays {
 				filtered.add(reading);
 		}
 		return filtered;
-	}
-	
-	private static void day2a() throws FileNotFoundException {
-		Scanner filein = new Scanner(new File("day2a.txt"));
-		int horizontal = 0;
-		int depth = 0;
-		while (filein.hasNextLine()) {
-			String parts[] = filein.nextLine().split(" ");
-			switch (parts[0]) {
-			case "forward": 
-				horizontal += Integer.parseInt(parts[1]);
-				break;
-			case "down": 
-				depth += Integer.parseInt(parts[1]);
-				break;
-			case "up": 
-				depth -= Integer.parseInt(parts[1]);
-				break;
-			}
-		}
-		System.out.println(horizontal*depth);
-	}
-	private static void day2b() throws FileNotFoundException {
-		Scanner filein = new Scanner(new File("day2a.txt"));
-		int horizontal = 0;
-		int aim = 0;
-		int depth = 0;
-		while (filein.hasNextLine()) {
-			String parts[] = filein.nextLine().split(" ");
-			switch (parts[0]) {
-			case "forward": 
-				horizontal += Integer.parseInt(parts[1]);
-				depth += aim*Integer.parseInt(parts[1]);
-				break;
-			case "down": 
-				aim += Integer.parseInt(parts[1]);
-				break;
-			case "up": 
-				aim -= Integer.parseInt(parts[1]);
-				break;
-			}
-		}
-		System.out.println(horizontal*depth);
-	}
-	
-	private static void day1a() throws FileNotFoundException {
-		Scanner filein = new Scanner(new File("day1a.txt"));
-		Integer last = null;
-		int increasedcnt = 0;
-		while (filein.hasNextLine()) {
-			int current = Integer.parseInt(filein.nextLine());
-			if (last!=null && current>last) {
-				increasedcnt++;
-			}
-//			System.out.print(last + " " + current);
-			last = current;
-			
-		}
-		filein.close();
-		System.out.println(increasedcnt);		
-	}
-	private static void day1b(int windowsize) throws FileNotFoundException {
-		Scanner filein = new Scanner(new File("day1a.txt"));
-		ArrayList<Integer> nums = new ArrayList<>();
-		while (filein.hasNextLine()) {
-			nums.add(Integer.parseInt(filein.nextLine()));
-		}
-		filein.close();
-		Integer lastsum = null;
-		int increasedcnt = 0;
-		for (int i=2; i<nums.size(); i++) {
-			int currentsum = nums.get(i-2) + nums.get(i-1) + nums.get(i);
-			if (lastsum != null && currentsum>lastsum) {
-				increasedcnt++;
-			}
-			lastsum = currentsum;
-		}
-		System.out.println(increasedcnt);		
 	}
 	
 	
