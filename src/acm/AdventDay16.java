@@ -62,15 +62,20 @@ public class AdventDay16 {
     	System.out.println(result[0] + " <---- part 2 solution (supposedly wrong?)"); // puzzle 2 solution
     	System.out.println(bits.length() + " <---- length of bit string");
     	System.out.println((result[1]) + " <---- total number of bits consumed");
+    	System.out.println(bits);
+    	System.out.println(pstr);
 	}
 
 	private static int globalversionsum = 0;
 	private static int opcount = 1;
+	private static String pstr = "";
 	private static long[] packet(String bits) {
 		// all packets start with 3 bits that are the version number
 		globalversionsum += Integer.parseInt(bits.substring(0,3), 2);
+		pstr += "VVV";
 		// next is the packet "type" which guides we do next
 		String id = bits.substring(3,6);
+		pstr += "TTT";
 		if (id.equals("100")) {
 			// found a "literal value"
 			long[] litret = literal(bits.substring(6)); 
@@ -90,6 +95,7 @@ public class AdventDay16 {
 		String litstr = ""; 
 		while (true) {
 			litstr += str.substring(ci+1,ci+5);
+			pstr += "N####";
 			if (str.charAt(ci)=='0')
 				break;
 			ci = ci + 5;
@@ -102,8 +108,10 @@ public class AdventDay16 {
 //		System.out.println("operator");
 		ArrayList<Long> operands = new ArrayList<>();
 		int consumed = 0;
+		pstr += "I";
 		if (opstr.charAt(0)=='0') {
 			// bit length
+			pstr += "LLLLLLLLLLLLLLL";
 			int pktlength = Integer.parseInt(opstr.substring(1,16),2);
 			int ci = 1 + 15;
 			while (ci<pktlength+16) {
@@ -113,6 +121,7 @@ public class AdventDay16 {
 			}
 			consumed = 1 + 15 + pktlength;
 		} else {
+			pstr += "LLLLLLLLLLL";
 			int numpkts = Integer.parseInt(opstr.substring(1,12),2);
 			int ci = 1 + 11;
 			for (int i=0; i<numpkts; i++) {
@@ -155,14 +164,20 @@ public class AdventDay16 {
 			result = operands.get(operands.size()-1);
 			debugstr = operands + " max=" + result;
 		} else if (id.equals("101")) {
-			result = operands.get(0)>operands.get(1) ? 1 : 0;
-			debugstr = operands.get(0) + ">" + operands.get(1) + " ... " + result;;
+			result = operands.get(0)>operands.get(1) ? 1L : 0L;
+			debugstr = operands.get(0) + ">" + operands.get(1) + " ... " + result;
+			if (operands.size()!=2)
+				System.out.println("uh-oh COMP with " + operands.size() + "!!!!!!!!!!!!!");
 		} else if (id.equals("110")) {
-			result = operands.get(0)<operands.get(1) ? 1 : 0;
-			debugstr = operands.get(0) + "<" + operands.get(1) + " ... " + result;;
+			result = operands.get(0)<operands.get(1) ? 1L : 0L;
+			debugstr = operands.get(0) + "<" + operands.get(1) + " ... " + result;
+			if (operands.size()!=2)
+				System.out.println("uh-oh COMP with " + operands.size() + "!!!!!!!!!!!!!");
 		} else if (id.equals("111")) {
-			result = operands.get(0)==operands.get(1) ? 1 : 0;
-			debugstr = operands.get(0) + "==" + operands.get(1) + " ... " + result;;
+			result = operands.get(0).equals(operands.get(1)) ? 1L : 0L;
+			debugstr = operands.get(0) + "==" + operands.get(1) + " ... " + result;
+			if (operands.size()!=2)
+				System.out.println("uh-oh COMP with " + operands.size() + "!!!!!!!!!!!!!");
 		}
 		System.out.println(opcount++ + "\t" + debugstr);
 		return new long[] {result, consumed};
