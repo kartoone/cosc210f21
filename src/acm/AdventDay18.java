@@ -28,8 +28,8 @@ public class AdventDay18 {
 		}
 		public Snailnum(Snailnum left, Snailnum right, Integer regleft, Integer regright, Snailnum parent) {
 			this(left, right, regleft, regright);
-			this.left.parent = parent;
-			this.right.parent = parent;
+			this.left.parent = this;
+			this.right.parent = this;
 		}
 		@Override
 		public String toString() {
@@ -53,7 +53,16 @@ public class AdventDay18 {
 			return result;
 		}
 		public int magnitude() {
-			return 0;
+			int result = 0;
+			if (left!=null)
+				result += 3*left.magnitude();
+			else
+				result += 3*regleft;
+			if (right!=null)
+				result += 2*right.magnitude();
+			else
+				result += 2*regright;
+			return result;
 		}
 	}
 	
@@ -124,11 +133,50 @@ public class AdventDay18 {
 			reduce(result);
 			System.out.println(result);
 		}
-		System.out.println(result.magnitude());
+		System.out.println(result.magnitude()); // puzzle 1 solution
+		
+		// we've corrupted our list so we need to re-read the input for puzzle 2
+		nums = new ArrayList<>();
+		for (String line: lines)
+			nums.add(parse(line));
+		
+		int largestmag = Integer.MIN_VALUE;
+		// now we need to pairwise add all the numbers (in both orders!) and find greatest magnitude
+		for (int i=0; i<nums.size(); i++) {
+			Snailnum num1 = nums.get(i);
+			for (int j=0; j<nums.size(); j++) {
+				if (i==j)
+					continue;
+				Snailnum num2 = nums.get(j);
+				num1 = num1.add(num2);
+				reduce(num1);
+				int mag = num1.magnitude();
+				if (mag>largestmag) {
+					largestmag = mag;
+				}
+				// now try adding them the other way
+				// must first restore num1 and num2 back to original non-reduced forms
+				num1 = parse(lines.get(i));
+				num2 = parse(lines.get(j));
+				num2 = num2.add(num1);
+				reduce(num2);
+				mag = num2.magnitude();
+				if (mag>largestmag) {
+					largestmag = mag;
+				}
+				
+				// restore num1 and num2 in the nums arraylist
+				// plus restore num1 for the next loop iteration
+				num1 = parse(lines.get(i));
+				nums.set(i, num1);
+				nums.set(j, parse(lines.get(j)));				
+			}
+		}
+		System.out.println(largestmag);
 	}
 	
 	public static void reduce(Snailnum num) {
-		System.out.println(num);
+//		System.out.println(num);
 		// first always try to go down the left side
 		if (explode(num.left, 1))
 			reduce(num); // recursively call reduce if our helper did something
