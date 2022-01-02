@@ -36,13 +36,13 @@ public class AdventDay15 {
 			}
 		}
 		
-		// dijkstras shortest path algorithm to build minimum spanning tree ... and calculate distance along the way to each node
-		int spt[][][] = dijkstra(grid);
+		// djikstras shortest path algorithm to build minimum spanning tree ... and calculate distance along the way to each node
+		int spt[][][] = djikstra(grid);
 		System.out.println(spt[rows-1][cols-1][0]);
 		
 		// puzzle 2 is simply the shortest path again using a "weirdly" expanded grid
 		int expgrid[][] = expandGrid(grid);
-		spt = dijkstra(expgrid); // this takes about 5 minutes to run (I'm glad I didn't give up on it!)
+		spt = djikstra(expgrid); // this takes about 5 minutes to run (I'm glad I didn't give up on it!)
 		System.out.println(spt[spt.length-1][spt[0].length-1][0]);		
 	}
 
@@ -77,7 +77,9 @@ public class AdventDay15 {
 				grid[r][c] = (grid[r][c]==9?1:grid[r][c]+1);						
 	}
 
-	private static int[][][] dijkstra(int[][] grid) {
+	// djikstra's shortest path algorithm ... frequent example for greedy alogrithm
+	// basically you are building a minimum spanning tree ... always choosing the next node to add to the tree as the one with the shortest "distance" from existing node in tree
+	private static int[][][] djikstra(int[][] grid) {
 		int spt[][][] = new int[grid.length][grid[0].length][2];
 		
 		// init our spanning tree ... this is massive graph with connections between all adjacent nodes so
